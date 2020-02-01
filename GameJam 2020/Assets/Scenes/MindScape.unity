@@ -652,6 +652,7 @@ GameObject:
   - component: {fileID: 1042215584}
   - component: {fileID: 1042215583}
   - component: {fileID: 1042215582}
+  - component: {fileID: 1042215585}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -724,6 +725,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1042215585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042215581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: febc8963acb9b4a87a7baa9122bd9b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTransform: {fileID: 1069218711}
+  SmoothFactor: 1
 --- !u!1 &1059201295
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,6 +834,12 @@ Transform:
   m_Father: {fileID: 1347225715}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1069218711 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8924439687910744951, guid: c1f1088c3e32afd4a8d3e18def71c9f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8924439687689019197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1140043981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1022,7 @@ GameObject:
   - component: {fileID: 1347225713}
   - component: {fileID: 1347225712}
   m_Layer: 9
-  m_Name: Eenmy_test (1)
+  m_Name: Enemy_test (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2202,7 +2223,7 @@ PrefabInstance:
     - target: {fileID: 6952823057960193473, guid: aff6e78f9b833ec4394517b6ea1d5bad,
         type: 3}
       propertyPath: m_Name
-      value: Eenmy_test
+      value: Enemy_test
       objectReference: {fileID: 0}
     - target: {fileID: 6952823057960193485, guid: aff6e78f9b833ec4394517b6ea1d5bad,
         type: 3}
