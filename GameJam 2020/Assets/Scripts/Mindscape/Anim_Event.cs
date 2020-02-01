@@ -48,7 +48,7 @@ public class Anim_Event : MonoBehaviour
             {
                 Player_Controller player = GetComponentInParent<Player_Controller>();
                 Enemy_Controller enem = collision.GetComponent<Enemy_Controller>();
-                //enem.Add_Impact(1f, enem.char_.transform.position - player.char_.transform.position);
+                enem.Add_Impact(4f, enem.char_.transform.position - player.char_.transform.position);
                 enem.Take_Damage(weapon_damage);
             }
             hit_things.Add(collision);

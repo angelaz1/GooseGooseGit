@@ -46,6 +46,8 @@ public class npc_test : MonoBehaviour
     public Animator Camera_Anim;
     public Animator Transition_Anim;
 
+    public bool is_starting_level = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +61,21 @@ public class npc_test : MonoBehaviour
 
         dialogue_window.SetActive(false);
         //RunDialogue();
+
+        if (!is_starting_level) Start_Patient();
+    }
+
+    public void Start_Patient()
+    {
+        StartCoroutine(Start_patient_talking());
+    }
+
+    public IEnumerator Start_patient_talking()
+    {
+        yield return new WaitForSeconds(2f);
+        GetComponent<Animator>().SetTrigger("enter");
+        yield return new WaitForSeconds(2f);
+        RunDialogue();
     }
 
     public void RunDialogue()
