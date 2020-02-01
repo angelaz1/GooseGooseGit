@@ -13,9 +13,7 @@ public class Asteroid_Spawner : MonoBehaviour
 
   public IEnumerator Spawn_Enemy()
   {
-      Debug.Log("Hiii");
       yield return new WaitForSeconds(Random.value * 2 + 1);
-      Debug.Log("Good");
       Instantiate (asteroid, new Vector3(0, 0, 0), Quaternion.identity);
       StartCoroutine(Spawn_Enemy());
   }

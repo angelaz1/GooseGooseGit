@@ -25,10 +25,13 @@ public class Asteroid : Enemy_Controller
         rb = GetComponent<Rigidbody2D>();
         asteroid_hitbox.enabled = true;
         playerTransform = GameObject.FindWithTag("Player").transform;
+        float size = Random.value + 0.7f;
+        transform.localScale = new Vector3(size, size, 1);
         setStartLocation();
     }
 
     private void setStartLocation() {
+        //Setting the starting location for the asteroid to spawn at
         bool goLeft = (Random.value <= 0.5);
         float playerYPos = playerTransform.position.y;
         float vertPos = (vertRange * Random.value) + playerYPos + vertDist;
@@ -36,6 +39,7 @@ public class Asteroid : Enemy_Controller
         else startLocation = new Vector2(horizDist, vertPos);
         transform.position = startLocation;
 
+        //Determining move direction to move towards the player
         moveDir = (playerTransform.position - transform.position).normalized; 
         move_speed = (Random.value * speedRange) + minSpeed;
     }
@@ -55,7 +59,7 @@ public class Asteroid : Enemy_Controller
             Spaceship_Controller player = collision.GetComponent<Spaceship_Controller>();
             player.Take_Damage(damage);
             Enemy_Controller enem = GetComponentInParent<Enemy_Controller>();
-            Vector2 displVec = new Vector2((player.char_.transform.position - enem.char_.transform.position).x, 0);
+            Vector2 displVec = new Vector2((player.char_.transform.position - enem.char_.transform.position).x, -20f);
             player.Add_Impact(8f, displVec);
             Death();
         }

@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Mindscape\Player_Controller.cs" />
      <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Asteroid.cs" />
      <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Asteroid_Spawner.cs" />
+     <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Objective_Controller.cs" />
      <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_Camera_Controller.cs" />
      <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_Controller.cs" />
      <Compile Include="Assets\Scripts\Office\Dialogue.cs" />
