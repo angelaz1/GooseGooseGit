@@ -8,7 +8,7 @@ public class Spaceship_Camera_Controller: Camera_Controller
 
   public void Update()
   {
-    Vector3 newPos = new Vector3(0, PlayerTransform.position.y, -10f);
+    Vector3 newPos = new Vector3(0, PlayerTransform.position.y + 2, -10f);
   	transform.position = Vector3.Slerp(transform.position, newPos, 1.0f);
   }
 }

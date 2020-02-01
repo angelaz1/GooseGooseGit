@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Mindscape\Passive_Sort.cs" />
      <Compile Include="Assets\Scripts\Mindscape\Player_Controller.cs" />
      <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Asteroid.cs" />
+     <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Asteroid_Spawner.cs" />
      <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_Camera_Controller.cs" />
      <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_Controller.cs" />
      <Compile Include="Assets\Scripts\Office\Dialogue.cs" />
@@ -74,6 +75,8 @@
      <Compile Include="Assets\Scripts\Office\DialogueOption.cs" />
      <Compile Include="Assets\Scripts\Office\XML_Loader.cs" />
      <Compile Include="Assets\Scripts\Office\npc_test.cs" />
+     <Compile Include="Assets\Scripts\RanchLevel\PlayerMove.cs" />
+     <Compile Include="Assets\Scripts\RanchLevel\SheepMove.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

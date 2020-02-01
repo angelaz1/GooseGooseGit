@@ -24,6 +24,7 @@ public class Asteroid : Enemy_Controller
     {
         rb = GetComponent<Rigidbody2D>();
         asteroid_hitbox.enabled = true;
+        playerTransform = GameObject.FindWithTag("Player").transform;
         setStartLocation();
     }
 
@@ -41,6 +42,9 @@ public class Asteroid : Enemy_Controller
 
     public override void Update()
     {
+        if(transform.position.y < playerTransform.position.y - 20) {
+          Death();
+        }
         velocity = moveDir * move_speed;
     }
 
