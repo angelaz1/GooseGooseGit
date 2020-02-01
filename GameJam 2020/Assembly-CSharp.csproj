@@ -65,6 +65,9 @@
      <Compile Include="Assets\Scripts\Mindscape\Idle_State.cs" />
      <Compile Include="Assets\Scripts\Mindscape\Passive_Sort.cs" />
      <Compile Include="Assets\Scripts\Mindscape\Player_Controller.cs" />
+     <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Asteroid.cs" />
+     <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_Camera_Controller.cs" />
+     <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_Controller.cs" />
      <Compile Include="Assets\Scripts\Office\Dialogue.cs" />
      <Compile Include="Assets\Scripts\Office\DialogueNode.cs" />
      <Compile Include="Assets\Scripts\Office\DialogueOption.cs" />

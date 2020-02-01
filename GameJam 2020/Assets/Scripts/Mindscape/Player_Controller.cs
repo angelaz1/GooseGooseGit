@@ -17,9 +17,12 @@ public class Player_Controller : MonoBehaviour
     public float move_speed=1;
 
     public float smooth = 0.1f;
-    private Vector3 m_Velocity = Vector3.zero;
+    
+    [HideInInspector]
+    public Vector3 m_Velocity = Vector3.zero;
 
-    private Rigidbody2D rb;
+    [HideInInspector]
+    public Rigidbody2D rb;
 
     public GameObject char_;
 
@@ -39,7 +42,7 @@ public class Player_Controller : MonoBehaviour
     public float token_t;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         health = max_health;
@@ -93,7 +96,7 @@ public class Player_Controller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
@@ -154,7 +157,7 @@ public class Player_Controller : MonoBehaviour
         impact = dir.normalized * mag;
     }
 
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         rb.velocity = Vector3.SmoothDamp(rb.velocity, velocity+impact, ref m_Velocity, smooth);
 

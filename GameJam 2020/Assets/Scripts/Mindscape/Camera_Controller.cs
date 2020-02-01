@@ -6,21 +6,22 @@ public class Camera_Controller : MonoBehaviour
 {
 	public Transform PlayerTransform;
 
-	private Vector3 _cameraOffset;
+  [HideInInspector]
+	public Vector3 _cameraOffset;
 
 	[Range(0.1f, 1.0f)]
 	public float SmoothFactor = 1.0f;
 
-  private float maxDistAway = 5f;
+  // private float maxDistAway = 5f;
 
   // Start is called before the first frame update
-  void Start()
+  public virtual void Start()
   {
   	_cameraOffset = transform.position - PlayerTransform.position;
   }
 
   // Update is called once per frame
-  void Update()
+  public virtual void Update()
   {	
     // Vector3 camPos = new Vector3(transform.position.x, transform.position.y, 0);
   	// float dist = Vector3.Distance(camPos, PlayerTransform.position);
