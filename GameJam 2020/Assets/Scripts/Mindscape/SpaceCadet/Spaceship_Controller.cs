@@ -34,6 +34,14 @@ public class Spaceship_Controller : Player_Controller
 
     public override void Take_Damage(int damage) {
       verticalVelocity = 0f;
+      //Run a spin-out animation
+      StartCoroutine(startSpinning());
       base.Take_Damage(damage);
+    }
+
+    private IEnumerator startSpinning() {
+      anim.SetBool("Spinning_out", true);
+      yield return new WaitForSeconds(0.5f);
+      anim.SetBool("Spinning_out", false);
     }
 }
