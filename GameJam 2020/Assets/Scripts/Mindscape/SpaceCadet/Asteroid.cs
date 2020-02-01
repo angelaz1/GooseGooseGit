@@ -42,10 +42,6 @@ public class Asteroid : Enemy_Controller
     public override void Update()
     {
         velocity = moveDir * move_speed;
-        if (rb.velocity.x!=0)
-        {
-            char_.transform.localScale = new Vector3(Mathf.Sign(rb.velocity.x), 1, 1);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

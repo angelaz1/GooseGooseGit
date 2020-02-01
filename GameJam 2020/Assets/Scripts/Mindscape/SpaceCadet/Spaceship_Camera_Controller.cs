@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spaceship_Camera_Controller : Camera_Controller
+public class Spaceship_Camera_Controller: Camera_Controller
 {
-  public override void Update()
+  public Transform PlayerTransform;
+
+  public void Update()
   {
-    Vector3 newPos = new Vector3(0, (PlayerTransform.position + _cameraOffset).y, _cameraOffset.z);
-  	transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
+    Vector3 newPos = new Vector3(0, PlayerTransform.position.y, -10f);
+  	transform.position = Vector3.Slerp(transform.position, newPos, 1.0f);
   }
 }

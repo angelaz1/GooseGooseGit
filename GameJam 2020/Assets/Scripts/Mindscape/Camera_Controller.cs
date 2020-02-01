@@ -10,13 +10,6 @@ public class Camera_Controller : MonoBehaviour
     [HideInInspector]
     public Vector3 shake_vec;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         transform.position = center + shake_vec;
