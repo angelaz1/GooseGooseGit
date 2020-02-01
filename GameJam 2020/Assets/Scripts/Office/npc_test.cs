@@ -11,6 +11,8 @@ using System.IO;
 
 using DialogueTree;
 
+using UnityEngine.SceneManagement;
+
 public class npc_test : MonoBehaviour
 {
     public Dialogue dia;
@@ -40,6 +42,9 @@ public class npc_test : MonoBehaviour
     public bool show_options = false;
 
     public int minigame_scene_index = 0;
+
+    public Animator Camera_Anim;
+    public Animator Transition_Anim;
 
     // Start is called before the first frame update
     void Start()
@@ -77,6 +82,15 @@ public class npc_test : MonoBehaviour
         selected_option = -2;
         dialogue_window.SetActive(false);
     }
+
+    public IEnumerator Enter_Minigame(int scene)
+    {
+        Camera_Anim.SetTrigger("trans");
+        Transition_Anim.SetTrigger("trans");
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(scene);
+    }
+
 
     public IEnumerator run(bool is_minigame)
     {
@@ -162,6 +176,7 @@ public class npc_test : MonoBehaviour
         if (is_minigame)
         {
             Debug.Log("Load Scene: " + minigame_scene_index);
+            StartCoroutine(Enter_Minigame(minigame_scene_index));
         }
     }
 
