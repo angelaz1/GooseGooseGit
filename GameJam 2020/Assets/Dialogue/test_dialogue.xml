@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Dialogue>
+  <Nodes>
+    <DialogueNode>
+      <NodeID>0</NodeID>
+      <Text>Hi, Welcome to the test dialogue.</Text>
+      <PearPort>true</PearPort>
+      <Options>
+        <DialogueOption>
+          <Text>Hi, how is your day!</Text>
+          <DestinationNodeID>1</DestinationNodeID>
+        </DialogueOption>
+        <DialogueOption>
+          <Text>Fuck you</Text>
+          <DestinationNodeID>2</DestinationNodeID>
+        </DialogueOption>
+        <DialogueOption>
+          <Text>Tem Tem Up!</Text>
+          <DestinationNodeID>3</DestinationNodeID>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <NodeID>1</NodeID>
+      <Text>Hello.</Text>
+      <PearPort>false</PearPort>
+      <Options>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <NodeID>2</NodeID>
+      <Text>Fuck you back.</Text>
+      <PearPort>true</PearPort>
+      <Options>
+        <DialogueOption>
+          <Text>Fuck you</Text>
+          <DestinationNodeID>2</DestinationNodeID>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <NodeID>3</NodeID>
+      <Text>I haven't coded that, but okay.</Text>
+      <PearPort>false</PearPort>
+      <Options>
+      </Options>
+    </DialogueNode>
+  </Nodes>
+</Dialogue>
