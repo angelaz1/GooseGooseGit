@@ -65,6 +65,8 @@
     <Compile Include="Assets\Scripts\Mindscape\Atk2_State.cs" />
     <Compile Include="Assets\Scripts\Mindscape\Atk3_State.cs" />
     <Compile Include="Assets\Scripts\Mindscape\Atk_End_state.cs" />
+    <Compile Include="Assets\Scripts\Mindscape\Camera_Controller.cs" />
+    <Compile Include="Assets\Scripts\Mindscape\Enem_atk_state.cs" />
     <Compile Include="Assets\Scripts\Mindscape\Enemy_Controller.cs" />
     <Compile Include="Assets\Scripts\Mindscape\Enemy_Example.cs" />
     <Compile Include="Assets\Scripts\Mindscape\Enemy_Weapon.cs" />

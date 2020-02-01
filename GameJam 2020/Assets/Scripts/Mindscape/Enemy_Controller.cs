@@ -27,18 +27,55 @@ public class Enemy_Controller : MonoBehaviour
     public Vector2 impact;
 
     public float move_speed = 1;
+    public float chase_speed = 1;
 
     public float smooth = 0.05f;
     [HideInInspector]
     public Vector3 m_Velocity = Vector3.zero;
 
+    public bool can_attack = true;
+
+    public float time_between_attacks = 1f;
+
+    public float alert_distance;
+    public float attack_distance;
+
+    [HideInInspector]
+    public bool alerted = false;
+
+    [HideInInspector]
+    public Vector2 wander_center;
+    [HideInInspector]
+    public Vector2 wander_target;
+    public float wander_range;
+
+    [HideInInspector]
+    public float wander_t;
+    [HideInInspector]
+    public float wander_max_t=4f;
+
+    public bool can_wander = true;
+
+    GameObject player;
+
+    [HideInInspector]
+    public Transform player_origin;
+
+    private Coroutine hit_stun_co;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        can_attack = true;
         health = max_health;
         Update_UI();
-        StartCoroutine(Test_Attack());
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        player_origin = player.GetComponent<Player_Controller>().char_.transform;
+
+        wander_center = transform.position;
+        wander_target = (Random.insideUnitCircle * wander_range) + wander_center;
     }
 
     public void Take_Damage(int damage)
@@ -49,6 +86,9 @@ public class Enemy_Controller : MonoBehaviour
             Death();
         }
         Update_UI();
+
+        if (hit_stun_co!=null) StopCoroutine(hit_stun_co);
+        hit_stun_co = StartCoroutine(Hit_Stun());
     }
 
     public void Death()
@@ -72,11 +112,22 @@ public class Enemy_Controller : MonoBehaviour
         }
     }
 
-    public IEnumerator Test_Attack()
+    public void End_Attack()
     {
-        yield return new WaitForSeconds(2f);
-        anim.SetTrigger("attack");
-        StartCoroutine(Test_Attack());
+        StartCoroutine(Attack_Rest());
+    }
+
+    public IEnumerator Attack_Rest()
+    {
+        yield return new WaitForSeconds(time_between_attacks);
+        can_attack = true;
+    }
+
+    public IEnumerator Hit_Stun()
+    {
+        can_attack = false;
+        yield return new WaitForSeconds(1f);
+        can_attack = true;
     }
 
     public void Add_Impact(float mag, Vector2 dir)
@@ -84,9 +135,58 @@ public class Enemy_Controller : MonoBehaviour
         impact = dir.normalized * mag;
     }
 
+    public IEnumerator New_Wander_Target()
+    {
+        can_wander = false;
+        yield return new WaitForSeconds(2f);
+        can_wander = true;
+        wander_t = 0;
+        wander_target = (Random.insideUnitCircle * wander_range) + wander_center;
+    }
+
     // Update is called once per frame
     public virtual void Update()
     {
+        float dist = Vector2.Distance(player_origin.position, char_.transform.position);
+        if (dist <= alert_distance && dist>attack_distance)
+        {
+            velocity = (player_origin.position - char_.transform.position).normalized * chase_speed;
+            alerted = true;
+        }
+        else if(dist<attack_distance && can_attack)
+        {
+            anim.SetTrigger("attack");
+            velocity = Vector2.zero;
+            can_attack = false;
+        }
+        else if (dist > alert_distance)
+        {
+            if (alerted)
+            {
+                alerted = false;
+                wander_target -= wander_center;
+                wander_center = transform.position;
+                wander_target += wander_center;
+            }
+            if (can_wander)
+            {
+                velocity = (wander_target - (Vector2)char_.transform.position).normalized * move_speed;
+                wander_t += Time.deltaTime;
+                if (Vector2.Distance(wander_target, char_.transform.position) < 0.2f || wander_t>wander_max_t)
+                {
+                    StartCoroutine(New_Wander_Target());
+                }
+            }
+            else
+            {
+                velocity = Vector2.zero;
+            }
+        }
+        else
+        {
+            velocity = Vector2.zero;
+        }
+
         if (rb.velocity.x!=0)
         {
             char_.transform.localScale = new Vector3(Mathf.Sign(rb.velocity.x), 1, 1);
