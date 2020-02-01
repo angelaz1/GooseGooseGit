@@ -187,9 +187,9 @@ public class Enemy_Controller : MonoBehaviour
             velocity = Vector2.zero;
         }
 
-        if (rb.velocity.x!=0)
+        if (velocity.x!=0)
         {
-            char_.transform.localScale = new Vector3(Mathf.Sign(rb.velocity.x), 1, 1);
+            char_.transform.localScale = new Vector3(Mathf.Sign(velocity.x), 1, 1);
         }
 
         anim.SetFloat("speed", rb.velocity.magnitude);

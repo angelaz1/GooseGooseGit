@@ -303,9 +303,22 @@ MonoBehaviour:
   rb: {fileID: 0}
   velocity: {x: 0, y: 0}
   impact: {x: 0, y: 0}
-  move_speed: 1
+  move_speed: 0.4
+  chase_speed: 1
   smooth: 0.05
   m_Velocity: {x: 0, y: 0, z: 0}
+  can_attack: 1
+  time_between_attacks: 0.5
+  alert_distance: 3
+  attack_distance: 1
+  alerted: 0
+  wander_center: {x: 0, y: 0}
+  wander_target: {x: 0, y: 0}
+  wander_range: 2
+  wander_t: 0
+  wander_max_t: 4
+  can_wander: 1
+  player_origin: {fileID: 0}
 --- !u!61 &6952823057960193475
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -671,7 +684,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.75670445, y: 0.5334656}
+  m_Offset: {x: 0.3494792, y: 0.4694519}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.77995354, y: 0.32593554}
@@ -682,7 +695,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.57456946, y: 0.9950838}
+  m_Size: {x: 1.38902, y: 0.657557}
   m_EdgeRadius: 0
 --- !u!114 &6952823058732734150
 MonoBehaviour:
