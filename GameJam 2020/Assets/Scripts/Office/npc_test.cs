@@ -46,13 +46,13 @@ public class npc_test : MonoBehaviour
     public Animator Camera_Anim;
     public Animator Transition_Anim;
 
-    public bool is_starting_level = true;
+    public bool is_starting_level = false;
 
     // Start is called before the first frame update
     void Start()
     {
         XmlSerializer serz = new XmlSerializer(typeof(Dialogue));
-        StreamReader reader = new StreamReader(Path.Combine(Application.dataPath + "/Dialogue", file_path));
+        StreamReader reader = new StreamReader(Path.Combine(Application.streamingAssetsPath + "/Dialogue", file_path));
 
         dia = (Dialogue)serz.Deserialize(reader);
 
