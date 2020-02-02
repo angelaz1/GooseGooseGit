@@ -51,7 +51,7 @@ public class Enemy_Controller : MonoBehaviour
 
     [HideInInspector]
     public float wander_t;
-    [HideInInspector]
+
     public float wander_max_t=4f;
 
     public bool can_wander = true;
@@ -61,7 +61,14 @@ public class Enemy_Controller : MonoBehaviour
     [HideInInspector]
     public Transform player_origin;
 
-    private Coroutine hit_stun_co;
+    public Coroutine hit_stun_co;
+
+    public float scale=1f;
+
+    public float anim_walk_speed = 1;
+
+    public GameObject hit_part;
+    public Vector3 hit_offset;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -78,7 +85,7 @@ public class Enemy_Controller : MonoBehaviour
         wander_target = (Random.insideUnitCircle * wander_range) + wander_center;
     }
 
-    public void Take_Damage(int damage)
+    public virtual void Take_Damage(int damage)
     {
         health -= damage;
         if (health <= 0)
@@ -86,6 +93,8 @@ public class Enemy_Controller : MonoBehaviour
             Death();
         }
         Update_UI();
+
+        Instantiate(hit_part, transform.position + hit_offset, hit_part.transform.rotation);
 
         if (hit_stun_co!=null) StopCoroutine(hit_stun_co);
         hit_stun_co = StartCoroutine(Hit_Stun());
@@ -152,15 +161,18 @@ public class Enemy_Controller : MonoBehaviour
         {
             velocity = (player_origin.position - char_.transform.position).normalized * chase_speed;
             alerted = true;
+            anim_walk_speed = 2;
         }
         else if(dist<attack_distance && can_attack)
         {
             anim.SetTrigger("attack");
             velocity = Vector2.zero;
             can_attack = false;
+            anim_walk_speed = 1;
         }
         else if (dist > alert_distance)
         {
+            anim_walk_speed = 1;
             if (alerted)
             {
                 alerted = false;
@@ -189,10 +201,11 @@ public class Enemy_Controller : MonoBehaviour
 
         if (velocity.x!=0)
         {
-            char_.transform.localScale = new Vector3(Mathf.Sign(velocity.x), 1, 1);
+            char_.transform.localScale = scale* new Vector3(Mathf.Sign(velocity.x), 1, 1);
         }
 
         anim.SetFloat("speed", rb.velocity.magnitude);
+        anim.SetFloat("move", anim_walk_speed);
     }
 
     public virtual void FixedUpdate()
