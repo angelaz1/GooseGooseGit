@@ -55,8 +55,13 @@ public class Asteroid : Enemy_Controller
             Spaceship_Controller player = collision.GetComponent<Spaceship_Controller>();
             player.Take_Damage(damage);
             Enemy_Controller enem = GetComponentInParent<Enemy_Controller>();
+<<<<<<< HEAD
             Vector2 displVec = new Vector2((player.char_.transform.position - enem.char_.transform.position).x, 0);
             player.Add_Impact(8f, displVec);
+=======
+            Vector2 displVec = new Vector2((player.char_.transform.position - enem.char_.transform.position).x, -100f);
+            player.Add_Impact(move_speed * 20f, displVec);
+>>>>>>> parent of 4e0d591... Progress Bar Added to Space Cadet
             Death();
         }
     }
