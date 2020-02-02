@@ -89,9 +89,12 @@ public class Asteroid : Enemy_Controller
             Enemy_Controller enem = GetComponentInParent<Enemy_Controller>();
 
             //Add knockback if not too far down
-            if(player.char_.transform.position.y > -10) {
+            if(player.char_.transform.position.y > 5f) {
               Vector2 displVec = new Vector2((player.char_.transform.position - enem.char_.transform.position).x, -100f);
               player.Add_Impact(move_speed * 15f, displVec);
+            } else {
+              Vector2 displVec = new Vector2((player.char_.transform.position - enem.char_.transform.position).x, -100f);
+              player.Add_Impact(move_speed * 1f, displVec);
             }
             Death();
         }

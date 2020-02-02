@@ -35,6 +35,8 @@ public class Spaceship_Controller : Player_Controller
         if(verticalVelocity < maxVertVelocity) {
           verticalVelocity += velIncrement;
         }
+
+        base.Update_Token_Timer();
     }
 
     public override void FixedUpdate()
@@ -51,6 +53,11 @@ public class Spaceship_Controller : Player_Controller
       //Run a spin-out animation
       StartCoroutine(startSpinning());
       base.Take_Damage(damage);
+    }
+
+    public override void Death()
+    {
+        GameObject.FindGameObjectWithTag("Manager").GetComponent<Spaceship_manager>().Fail();
     }
 
     private IEnumerator startSpinning() {
