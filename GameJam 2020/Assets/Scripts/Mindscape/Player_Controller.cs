@@ -81,7 +81,7 @@ public class Player_Controller : MonoBehaviour
         Update_UI();
     }
 
-    public void Death()
+    public virtual void Death()
     {
         GameObject.FindGameObjectWithTag("Manager").GetComponent<sheep_manager>().Fail_sheep();
     }

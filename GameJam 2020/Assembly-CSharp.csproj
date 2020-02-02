@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Objective_Controller.cs" />
      <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_Camera_Controller.cs" />
      <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_Controller.cs" />
+     <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_manager.cs" />
      <Compile Include="Assets\Scripts\Mindscape\bush.cs" />
      <Compile Include="Assets\Scripts\Mindscape\sheep_manager.cs" />
      <Compile Include="Assets\Scripts\Office\Dialogue.cs" />
