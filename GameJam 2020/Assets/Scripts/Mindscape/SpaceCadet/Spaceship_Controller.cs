@@ -20,9 +20,6 @@ public class Spaceship_Controller : Player_Controller
         endPlanetY = GameObject.FindWithTag("ObjectivePlanet").transform.position.y;
 
         fullDisplacement = endPlanetY - startPlanetY;
-        Debug.Log(endPlanetY);
-        Debug.Log(startPlanetY);
-        Debug.Log(fullDisplacement);
         verticalVelocity = 1f;
 
     }
@@ -44,9 +41,7 @@ public class Spaceship_Controller : Player_Controller
         float playerDisp = endPlanetY - transform.position.y;
         float fullLength = fullBar.rect.width;
         float frac = (fullDisplacement - playerDisp) / fullDisplacement;
-        Debug.Log(frac * fullLength);
         progressBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, frac * fullLength);
-        // progressBar.rect.width = frac * fullLength;
     }
 
     public override void Take_Damage(int damage) {

@@ -42,7 +42,7 @@ public class Player_Controller : MonoBehaviour
     public Vector3 hit_offset;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         health = max_health;
@@ -101,7 +101,7 @@ public class Player_Controller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
@@ -162,7 +162,7 @@ public class Player_Controller : MonoBehaviour
         impact = dir.normalized * mag;
     }
 
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         rb.velocity = Vector3.SmoothDamp(rb.velocity, velocity+impact, ref m_Velocity, smooth);
 

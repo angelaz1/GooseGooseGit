@@ -292,7 +292,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   center: {x: 0, y: 0, z: -10}
   shake_vec: {x: 0, y: 0, z: 0}
-  PlayerTransform: {fileID: 8924439687172926535}
+  target: {fileID: 8924439687172926535}
+  smoothTime: 0.3
 --- !u!1 &442478836
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +435,7 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1802936597
+  m_SortingLayerID: 1372632875
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -2671,11 +2672,7 @@ RectTransform:
   - {fileID: 580805264}
   - {fileID: 1214478888}
   m_Father: {fileID: 0}
-<<<<<<< HEAD
   m_RootOrder: 2
-=======
-  m_RootOrder: 1
->>>>>>> parent of 577bf53... reverting
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2759,8 +2756,6 @@ MonoBehaviour:
   impact: {x: 0, y: 0}
   move_speed: 25
   smooth: 0.05
-  m_Velocity: {x: 0, y: 0, z: 0}
-  rb: {fileID: 0}
   char_: {fileID: 8924439687113981132}
   anim: {fileID: 8924439687113981134}
   is_attacking: 0
@@ -2776,6 +2771,8 @@ MonoBehaviour:
   - {fileID: 2011811744}
   token_time_limit: 30
   token_t: 0
+  hit_part: {fileID: 1832475428084072, guid: c1bee09c88207064ca42d6ebc274c572, type: 3}
+  hit_offset: {x: 0, y: 0, z: 0}
   progressBar: {fileID: 10654924}
   fullBar: {fileID: 580805264}
 --- !u!1 &1440558891
@@ -2842,11 +2839,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< HEAD
   m_RootOrder: 4
-=======
-  m_RootOrder: 3
->>>>>>> parent of 577bf53... reverting
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1621979093
 GameObject:
@@ -3134,11 +3127,7 @@ RectTransform:
   m_AnchoredPosition: {x: -50, y: 210}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
 --- !u!1001 &2024166040
-=======
---- !u!1001 &3118091168341962382
->>>>>>> parent of 577bf53... reverting
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
