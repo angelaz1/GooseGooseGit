@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Objective_Controller : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Objective_Controller : MonoBehaviour
         if (collision.GetComponent<Spaceship_Controller>() != null)
         {
             Debug.Log("Objective Reached! Transition back to patient....");
-            Time.timeScale = 0;
+            SceneManager.LoadScene(4);
         }
     }
 }
