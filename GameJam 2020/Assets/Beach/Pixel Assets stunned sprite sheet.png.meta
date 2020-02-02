@@ -1,0 +1,427 @@
+fileFormatVersion: 2
+guid: c54f21dbb1101ab4698ec75f215af13b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7340769417800420400
+    second: Pixel Assets stunned sprite sheet_0
+  - first:
+      213: -1647657607053107477
+    second: Pixel Assets stunned sprite sheet_1
+  - first:
+      213: -6815858853690567180
+    second: Pixel Assets stunned sprite sheet_2
+  - first:
+      213: 1261548986306901
+    second: Pixel Assets stunned sprite sheet_3
+  - first:
+      213: -2975646217831484306
+    second: Pixel Assets stunned sprite sheet_4
+  - first:
+      213: -2829884282307083599
+    second: Pixel Assets stunned sprite sheet_5
+  - first:
+      213: 9071731501000437250
+    second: Pixel Assets stunned sprite sheet_6
+  - first:
+      213: -4353755006249454701
+    second: Pixel Assets stunned sprite sheet_7
+  - first:
+      213: 4041757872532763183
+    second: Pixel Assets stunned sprite sheet_8
+  - first:
+      213: 4181610598325606988
+    second: Pixel Assets stunned sprite sheet_9
+  - first:
+      213: -1550933589091463393
+    second: Pixel Assets stunned sprite sheet_10
+  - first:
+      213: -8545158543984381105
+    second: Pixel Assets stunned sprite sheet_11
+  - first:
+      213: 7919868746826707210
+    second: Pixel Assets stunned sprite sheet_12
+  - first:
+      213: 5089354683556569264
+    second: Pixel Assets stunned sprite sheet_13
+  - first:
+      213: -8426744278738963017
+    second: Pixel Assets stunned sprite sheet_14
+  - first:
+      213: 3806080054174066804
+    second: Pixel Assets stunned sprite sheet_15
+  - first:
+      213: -2581173655112579571
+    second: Pixel Assets stunned sprite sheet_16
+  - first:
+      213: -3229437928176574242
+    second: Pixel Assets stunned sprite sheet_17
+  - first:
+      213: -236412404183070524
+    second: Pixel Assets stunned sprite sheet_18
+  - first:
+      213: -2937623009743747389
+    second: Pixel Assets stunned sprite sheet_19
+  - first:
+      213: 5696999141547780579
+    second: Pixel Assets stunned sprite sheet_20
+  - first:
+      213: 2132256769098783752
+    second: Pixel Assets stunned sprite sheet_21
+  - first:
+      213: -8197265041617541297
+    second: Pixel Assets stunned sprite sheet_22
+  - first:
+      213: -7578020506059492442
+    second: Pixel Assets stunned sprite sheet_23
+  - first:
+      213: -8463901687098616123
+    second: Pixel Assets stunned sprite sheet_24
+  - first:
+      213: 7940526229463300222
+    second: Pixel Assets stunned sprite sheet_25
+  - first:
+      213: 8550567666565752530
+    second: Pixel Assets stunned sprite sheet_26
+  - first:
+      213: -3226087958813479619
+    second: Pixel Assets stunned sprite sheet_27
+  - first:
+      213: 657271916058699560
+    second: Pixel Assets stunned sprite sheet_28
+  - first:
+      213: 8929902370023305995
+    second: Pixel Assets stunned sprite sheet_29
+  - first:
+      213: 500964323371769217
+    second: Pixel Assets stunned sprite sheet_30
+  - first:
+      213: 6460058123361524610
+    second: Pixel Assets stunned sprite sheet_31
+  - first:
+      213: -6885123950694217294
+    second: Pixel Assets stunned sprite sheet_32
+  - first:
+      213: -4753088578244683249
+    second: Pixel Assets stunned sprite sheet_33
+  - first:
+      213: 5205794785020804104
+    second: Pixel Assets stunned sprite sheet_34
+  - first:
+      213: 6138429275576328191
+    second: Pixel Assets stunned sprite sheet_35
+  - first:
+      213: 6692948372692714542
+    second: Pixel Assets stunned sprite sheet_36
+  - first:
+      213: 382923289109292861
+    second: Pixel Assets stunned sprite sheet_37
+  - first:
+      213: -4760575035839170272
+    second: Pixel Assets stunned sprite sheet_38
+  - first:
+      213: -5249301214529084236
+    second: Pixel Assets stunned sprite sheet_39
+  - first:
+      213: -6352305824407886863
+    second: Pixel Assets stunned sprite sheet_40
+  - first:
+      213: -7469594735652106480
+    second: Pixel Assets stunned sprite sheet_41
+  - first:
+      213: 1223219214551224696
+    second: Pixel Assets stunned sprite sheet_42
+  - first:
+      213: 8006651635837836054
+    second: Pixel Assets stunned sprite sheet_43
+  - first:
+      213: -5355875088683632255
+    second: Pixel Assets stunned sprite sheet_44
+  - first:
+      213: -1376591534900514263
+    second: Pixel Assets stunned sprite sheet_45
+  - first:
+      213: -502307319285327412
+    second: Pixel Assets stunned sprite sheet_46
+  - first:
+      213: 4467926683749079062
+    second: Pixel Assets stunned sprite sheet_47
+  - first:
+      213: -1796310238345849892
+    second: Pixel Assets stunned sprite sheet_48
+  - first:
+      213: -8041617187394484822
+    second: Pixel Assets stunned sprite sheet_49
+  - first:
+      213: -3177227481735379345
+    second: Pixel Assets stunned sprite sheet_50
+  - first:
+      213: 8157618125383583665
+    second: Pixel Assets stunned sprite sheet_51
+  - first:
+      213: -477619596969736469
+    second: Pixel Assets stunned sprite sheet_52
+  - first:
+      213: -3123755001425007029
+    second: Pixel Assets stunned sprite sheet_53
+  - first:
+      213: 6715065418211983150
+    second: Pixel Assets stunned sprite sheet_54
+  - first:
+      213: 3041490784683283371
+    second: Pixel Assets stunned sprite sheet_55
+  - first:
+      213: -3567799909867698415
+    second: Pixel Assets stunned sprite sheet_56
+  - first:
+      213: -5163121897186497616
+    second: Pixel Assets stunned sprite sheet_57
+  - first:
+      213: 2298270364437530937
+    second: Pixel Assets stunned sprite sheet_58
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Pixel Assets stunned sprite sheet_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 125
+        width: 223
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d374f98b19502a90800000000000000
+      internalID: -7340769417800420400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Assets stunned sprite sheet_1
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 124
+        width: 199
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bee1124d2285229e0800000000000000
+      internalID: -1647657607053107477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Assets stunned sprite sheet_2
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 124
+        width: 197
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f5929a0c743961a0800000000000000
+      internalID: -6815858853690567180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Assets stunned sprite sheet_3
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 125
+        width: 198
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55112334f5b740000800000000000000
+      internalID: 1261548986306901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Assets stunned sprite sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 125
+        width: 195
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e647be0d78164b6d0800000000000000
+      internalID: -2975646217831484306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Assets stunned sprite sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 127
+        width: 172
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b200a51d3b3ab8d0800000000000000
+      internalID: -2829884282307083599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Assets stunned sprite sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1613
+        y: 125
+        width: 195
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20e2ade6cb345ed70800000000000000
+      internalID: 9071731501000437250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 28ef83dde30cd9441abfaa51a1eb9909
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

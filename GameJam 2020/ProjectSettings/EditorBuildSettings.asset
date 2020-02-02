@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Office3.unity
     guid: 186c45fd373f64847ab1b349e482a698
+  - enabled: 1
+    path: Assets/Scenes/ShellGame.unity
+    guid: aea239c566742fa4eb4f0dd145e52079
   m_configObjects: {}
