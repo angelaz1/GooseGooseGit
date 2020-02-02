@@ -146,6 +146,8 @@ public class npc_test : MonoBehaviour
                 yield return new WaitForSeconds(0.02f);
             }
 
+            dia_text.GetComponent<Text>().text = _text;
+
             next.SetActive(true);
 
             while (!show_options)

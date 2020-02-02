@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Dialogue>
+  <Nodes>
+    <DialogueNode>
+      <NodeID>0</NodeID>
+      <Text>You are the therapist everyone is talking about, right?</Text>
+      <Options>
+        <DialogueOption>
+          <Text>Okay, let me look at your history... No previous mental illness... hmm...</Text>
+          <DestinationNodeID>1</DestinationNodeID>
+        </DialogueOption>
+        <DialogueOption>
+          <Text>Alright, what's wrong? Tell me about your problem.</Text>
+          <DestinationNodeID>2</DestinationNodeID>
+        </DialogueOption>
+        <DialogueOption>
+          <Text>Damn you looked trashed. Have you been drinking?</Text>
+          <DestinationNodeID>3</DestinationNodeID>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <NodeID>1</NodeID>
+      <Text>I have a freaking headache. It hurts so much that I can't sleep.</Text>
+      <Options>
+        <DialogueOption>
+          <Text>Can you describe the headache?</Text>
+          <DestinationNodeID>4</DestinationNodeID>
+        </DialogueOption>
+        <DialogueOption>
+          <Text>Alright. Can you tell me more about this headache so I can help you?</Text>
+          <DestinationNodeID>5</DestinationNodeID>
+        </DialogueOption>
+        <DialogueOption>
+          <Text>Wow. Headache is like totally drunk dude.</Text>
+          <DestinationNodeID>6</DestinationNodeID>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <NodeID>2</NodeID>
+      <Text>It's my head. It's killing me. I can't sleep cus it hurts so much.</Text>
+      <Options>
+        <DialogueOption>
+          <Text>Can you describe the headache?</Text>
+          <DestinationNodeID>4</DestinationNodeID>
+        </DialogueOption>
+        <DialogueOption>
+          <Text>Alright. Can you tell me more about this headache so I can help you?</Text>
+          <DestinationNodeID>5</DestinationNodeID>
+        </DialogueOption>
+        <DialogueOption>
+          <Text>Wow. Headache is like totally drunk dude.</Text>
+          <DestinationNodeID>6</DestinationNodeID>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <NodeID>3</NodeID>
+      <Text>What? No. I am just having a strange headache.</Text>
+      <Options>
+        <DialogueOption>
+          <Text>Can you describe the headache?</Text>
+          <DestinationNodeID>4</DestinationNodeID>
+        </DialogueOption>
+        <DialogueOption>
+          <Text>Alright. Can you tell me more about this headache so I can help you?</Text>
+          <DestinationNodeID>5</DestinationNodeID>
+        </DialogueOption>
+        <DialogueOption>
+          <Text>Wow. Headache is like totally drunk dude.</Text>
+          <DestinationNodeID>6</DestinationNodeID>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <NodeID>4</NodeID>
+      <Text>It feels like everything in my head is loose and is trying to escape.</Text>
+      <Options>
+        <DialogueOption>
+          <Text>Alright, then. Let's try this. I think this will help.</Text>
+          <DestinationNodeID>-1</DestinationNodeID>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <NodeID>5</NodeID>
+      <Text>It feels like there are monsters that bangs on my head every time I try to sleep.</Text>
+      <Options>
+        <DialogueOption>
+          <Text>Alright, then. I think this will help you.</Text>
+          <DestinationNodeID>-1</DestinationNodeID>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <NodeID>6</NodeID>
+      <Text>Hey this is serious! I can't even sleep because of this.</Text>
+      <Options>
+        <DialogueOption>
+          <Text>Alright, alright... geez. I think this will help you.</Text>
+          <DestinationNodeID>-1</DestinationNodeID>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+  </Nodes>
+</Dialogue>
