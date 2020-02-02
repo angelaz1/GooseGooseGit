@@ -4,6 +4,7 @@
     <DialogueNode>
       <NodeID>0</NodeID>
       <Text>Hi, Welcome to the test dialogue.</Text>
+      <PearPort>true</PearPort>
       <Options>
         <DialogueOption>
           <Text>Hi, how is your day!</Text>
@@ -22,12 +23,14 @@
     <DialogueNode>
       <NodeID>1</NodeID>
       <Text>Hello.</Text>
+      <PearPort>false</PearPort>
       <Options>
       </Options>
     </DialogueNode>
     <DialogueNode>
       <NodeID>2</NodeID>
       <Text>Fuck you back.</Text>
+      <PearPort>true</PearPort>
       <Options>
         <DialogueOption>
           <Text>Fuck you</Text>
@@ -38,6 +41,7 @@
     <DialogueNode>
       <NodeID>3</NodeID>
       <Text>I haven't coded that, but okay.</Text>
+      <PearPort>false</PearPort>
       <Options>
       </Options>
     </DialogueNode>

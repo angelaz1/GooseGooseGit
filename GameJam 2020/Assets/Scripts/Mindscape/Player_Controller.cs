@@ -17,9 +17,12 @@ public class Player_Controller : MonoBehaviour
     public float move_speed=1;
 
     public float smooth = 0.1f;
-    private Vector3 m_Velocity = Vector3.zero;
+    
+    [HideInInspector]
+    public Vector3 m_Velocity = Vector3.zero;
 
-    private Rigidbody2D rb;
+    [HideInInspector]
+    public Rigidbody2D rb;
 
     public GameObject char_;
 
@@ -38,11 +41,8 @@ public class Player_Controller : MonoBehaviour
     public float token_time_limit = 30;
     public float token_t;
 
-    public GameObject hit_part;
-    public Vector3 hit_offset;
-
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         health = max_health;
@@ -73,15 +73,13 @@ public class Player_Controller : MonoBehaviour
         {
             Death();
         }
-        Instantiate(hit_part, transform.position + hit_offset, hit_part.transform.rotation);
-
         token_t = token_time_limit;
         Update_UI();
     }
 
     public void Death()
     {
-        GameObject.FindGameObjectWithTag("Manager").GetComponent<sheep_manager>().Fail_sheep();
+
     }
 
     public void Update_UI()
@@ -101,7 +99,7 @@ public class Player_Controller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
@@ -162,7 +160,7 @@ public class Player_Controller : MonoBehaviour
         impact = dir.normalized * mag;
     }
 
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         rb.velocity = Vector3.SmoothDamp(rb.velocity, velocity+impact, ref m_Velocity, smooth);
 
