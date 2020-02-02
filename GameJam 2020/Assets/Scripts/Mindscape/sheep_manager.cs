@@ -34,12 +34,12 @@ public class sheep_manager : MonoBehaviour
     public IEnumerator Finished_Collecting_Sheep()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(3);
     }
 
     public IEnumerator Fail_Collecting_Sheep()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(3);
     }
 }

@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scenes\Scene_button.cs" />
     <Compile Include="Assets\Scripts\Mindscape\Active_Sort.cs" />
     <Compile Include="Assets\Scripts\Mindscape\Anim_Event.cs" />
     <Compile Include="Assets\Scripts\Mindscape\Atk2_State.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Objective_Controller.cs" />
     <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_Camera_Controller.cs" />
     <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_Controller.cs" />
+    <Compile Include="Assets\Scripts\Mindscape\SpaceCadet\Spaceship_manager.cs" />
     <Compile Include="Assets\Scripts\Mindscape\bush.cs" />
     <Compile Include="Assets\Scripts\Mindscape\sheep_manager.cs" />
     <Compile Include="Assets\Scripts\Office\Dialogue.cs" />

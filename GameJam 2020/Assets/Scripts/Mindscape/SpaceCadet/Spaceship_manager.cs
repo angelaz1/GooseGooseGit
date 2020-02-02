@@ -14,6 +14,6 @@ public class Spaceship_manager : MonoBehaviour
     public IEnumerator Fail_Ship()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(5);
     }
 }

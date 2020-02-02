@@ -1894,7 +1894,7 @@ MonoBehaviour:
   player_icon: {fileID: 21300000, guid: 55c08531fe03476438f92e0a4a4c2e6e, type: 3}
   patient_icon: {fileID: 21300000, guid: a85e36909a908864cbbae81c571c521f, type: 3}
   show_options: 0
-  minigame_scene_index: 5
+  minigame_scene_index: 6
   Camera_Anim: {fileID: 519420030}
   Transition_Anim: {fileID: 1519476850}
   is_starting_level: 0

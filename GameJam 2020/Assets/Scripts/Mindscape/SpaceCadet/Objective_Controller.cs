@@ -10,7 +10,7 @@ public class Objective_Controller : MonoBehaviour
         if (collision.GetComponent<Spaceship_Controller>() != null)
         {
             Debug.Log("Objective Reached! Transition back to patient....");
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(5);
         }
     }
 }
