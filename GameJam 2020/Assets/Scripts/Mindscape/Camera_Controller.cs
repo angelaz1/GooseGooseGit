@@ -10,9 +10,25 @@ public class Camera_Controller : MonoBehaviour
     [HideInInspector]
     public Vector3 shake_vec;
 
+    public Transform target;
+
+    public float smoothTime = 0.3F;
+    private Vector3 velocity = Vector3.zero;
+
+    void Start()
+    {
+        center = target.position;
+    }
+
+    // Update is called once per frame
     void Update()
     {
-        transform.position = center + shake_vec;
+        // Define a target position above and behind the target transform
+
+        center = Vector3.SmoothDamp(center, target.position, ref velocity, smoothTime);
+
+        // Smoothly move the camera towards that target position
+        transform.position = center + shake_vec + new Vector3(0,0,-10);
     }
 
     public IEnumerator Shake(float duration, float magnitude)
