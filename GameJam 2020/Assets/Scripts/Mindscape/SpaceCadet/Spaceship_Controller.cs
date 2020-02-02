@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class Spaceship_Controller : Player_Controller
 {
-    private float verticalVelocity;
-    private float maxVertVelocity = 20f;
+    [HideInInspector]
+    public float verticalVelocity;
+    [HideInInspector]
+    public float maxVertVelocity = 20f;
     private float velIncrement = 0.01f;
     public RectTransform progressBar;
     public RectTransform fullBar;

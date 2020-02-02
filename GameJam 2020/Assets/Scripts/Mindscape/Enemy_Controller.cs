@@ -100,7 +100,7 @@ public class Enemy_Controller : MonoBehaviour
         hit_stun_co = StartCoroutine(Hit_Stun());
     }
 
-    public void Death()
+    public virtual void Death()
     {
         Destroy(gameObject);
     }

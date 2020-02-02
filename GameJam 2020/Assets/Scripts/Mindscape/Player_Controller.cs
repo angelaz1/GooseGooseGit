@@ -73,7 +73,9 @@ public class Player_Controller : MonoBehaviour
         {
             Death();
         }
-        Instantiate(hit_part, transform.position + hit_offset, hit_part.transform.rotation);
+        if(hit_part != null) {
+            Instantiate(hit_part, transform.position + hit_offset, hit_part.transform.rotation);
+        }
 
         token_t = token_time_limit;
         Update_UI();
