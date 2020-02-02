@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - StartingPlanet
-  - ObjectivePlanet
+  - pen
+  - Manager
   layers:
   - Default
   - TransparentFX
@@ -19,7 +19,7 @@ TagManager:
   - Enemy
   - Weapons
   - Obstacles
-  - Background
+  - 
   - 
   - 
   - 
@@ -40,9 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 3680031981
+  - name: Behind
+    uniqueID: 3285285075
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2004359411
     locked: 0
