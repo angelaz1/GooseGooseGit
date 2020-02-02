@@ -8,10 +8,23 @@ public class Spaceship_Controller : Player_Controller
     private float verticalVelocity;
     private float maxVertVelocity = 20f;
     private float velIncrement = 0.01f;
+    public RectTransform progressBar;
+    public RectTransform fullBar;
+    private float startPlanetY;
+    private float endPlanetY;
+    private float fullDisplacement;
 
     public override void Start() {
-        verticalVelocity = 1f;
         base.Start();
+        startPlanetY = GameObject.FindWithTag("StartingPlanet").transform.position.y;
+        endPlanetY = GameObject.FindWithTag("ObjectivePlanet").transform.position.y;
+
+        fullDisplacement = endPlanetY - startPlanetY;
+        Debug.Log(endPlanetY);
+        Debug.Log(startPlanetY);
+        Debug.Log(fullDisplacement);
+        verticalVelocity = 1f;
+        
     }
 
     public override void Update()
@@ -30,6 +43,17 @@ public class Spaceship_Controller : Player_Controller
         if(verticalVelocity < maxVertVelocity) {
           verticalVelocity += velIncrement;
         }
+    }
+
+    public override void FixedUpdate() 
+    {
+        base.FixedUpdate();
+        float playerDisp = endPlanetY - transform.position.y;
+        float fullLength = fullBar.rect.width;
+        float frac = (fullDisplacement - playerDisp) / fullDisplacement;
+        Debug.Log(frac * fullLength);
+        progressBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, frac * fullLength);
+        // progressBar.rect.width = frac * fullLength;
     }
 
     public override void Take_Damage(int damage) {
