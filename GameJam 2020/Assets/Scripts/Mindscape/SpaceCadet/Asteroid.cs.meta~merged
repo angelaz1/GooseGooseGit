@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:GameJam 2020/Assets/Scripts/Mindscape/SpaceCadet/Asteroid.cs.meta
+guid: 3493bf651b34c4faa8c4821cac026938
+=======
+guid: 9254ea6e9d71d499ebe09de2fb17e138
+>>>>>>> parent of 7135b96... jdstuff:GameJam 2020/Assets/Scripts/RanchLevel/PlayerMove.cs.meta
+=======
+guid: 3493bf651b34c4faa8c4821cac026938
+>>>>>>> parent of 7135b96... jdstuff
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

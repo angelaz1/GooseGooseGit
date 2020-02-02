@@ -63,7 +63,7 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
-    public void Take_Damage(int damage)
+    public virtual void Take_Damage(int damage)
     {
         Camera_Controller cam_c = Camera.main.GetComponent<Camera_Controller>();
         cam_c.StartCoroutine(cam_c.Shake(0.2f, 0.1f));

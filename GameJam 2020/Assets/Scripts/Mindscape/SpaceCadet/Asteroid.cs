@@ -24,10 +24,14 @@ public class Asteroid : Enemy_Controller
     {
         rb = GetComponent<Rigidbody2D>();
         asteroid_hitbox.enabled = true;
+        playerTransform = GameObject.FindWithTag("Player").transform;
+        float size = Random.value + 0.7f;
+        transform.localScale = new Vector3(size, size, 1);
         setStartLocation();
     }
 
     private void setStartLocation() {
+        //Setting the starting location for the asteroid to spawn at
         bool goLeft = (Random.value <= 0.5);
         float playerYPos = playerTransform.position.y;
         float vertPos = (vertRange * Random.value) + playerYPos + vertDist;
@@ -35,17 +39,17 @@ public class Asteroid : Enemy_Controller
         else startLocation = new Vector2(horizDist, vertPos);
         transform.position = startLocation;
 
-        moveDir = (playerTransform.position - transform.position).normalized; 
+        //Determining move direction to move towards the player
+        moveDir = (playerTransform.position - transform.position).normalized;
         move_speed = (Random.value * speedRange) + minSpeed;
     }
 
     public override void Update()
     {
-        velocity = moveDir * move_speed;
-        if (rb.velocity.x!=0)
-        {
-            char_.transform.localScale = new Vector3(Mathf.Sign(rb.velocity.x), 1, 1);
+        if(transform.position.y < playerTransform.position.y - 20) {
+          Death();
         }
+        velocity = moveDir * move_speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -55,13 +59,12 @@ public class Asteroid : Enemy_Controller
             Spaceship_Controller player = collision.GetComponent<Spaceship_Controller>();
             player.Take_Damage(damage);
             Enemy_Controller enem = GetComponentInParent<Enemy_Controller>();
-<<<<<<< HEAD
-            Vector2 displVec = new Vector2((player.char_.transform.position - enem.char_.transform.position).x, 0);
-            player.Add_Impact(8f, displVec);
-=======
-            Vector2 displVec = new Vector2((player.char_.transform.position - enem.char_.transform.position).x, -100f);
-            player.Add_Impact(move_speed * 20f, displVec);
->>>>>>> parent of 4e0d591... Progress Bar Added to Space Cadet
+
+            //Add knockback if not too far down
+            if(player.char_.transform.position.y > -10) {
+              Vector2 displVec = new Vector2((player.char_.transform.position - enem.char_.transform.position).x, -100f);
+              player.Add_Impact(move_speed * 20f, displVec);
+            }
             Death();
         }
     }

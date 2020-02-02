@@ -5,36 +5,48 @@ using UnityEngine.UI;
 
 public class Spaceship_Controller : Player_Controller
 {
-<<<<<<< HEAD
-    private float verticalVelocity = 1f;
-=======
     private float verticalVelocity;
     private float maxVertVelocity = 20f;
     private float velIncrement = 0.01f;
+    public RectTransform progressBar;
+    public RectTransform fullBar;
+    private float startPlanetY;
+    private float endPlanetY;
+    private float fullDisplacement;
 
     public override void Start() {
-        verticalVelocity = 1f;
         base.Start();
+        startPlanetY = GameObject.FindWithTag("StartingPlanet").transform.position.y;
+        endPlanetY = GameObject.FindWithTag("ObjectivePlanet").transform.position.y;
+
+        fullDisplacement = endPlanetY - startPlanetY;
+        Debug.Log(endPlanetY);
+        Debug.Log(startPlanetY);
+        Debug.Log(fullDisplacement);
+        verticalVelocity = 1f;
+
     }
->>>>>>> parent of 4e0d591... Progress Bar Added to Space Cadet
 
     public override void Update()
     {
-        input = new Vector2(Input.GetAxisRaw("Horizontal"), verticalVelocity);
-        velocity = input.normalized * move_speed*0.25f;
-
-        if (input.x != 0)
-        {
-            char_.transform.localScale = new Vector3(Mathf.Sign(rb.velocity.x), 1, 1);
-        }
-
-        Update_Token_Timer();
-<<<<<<< HEAD
-=======
+        input = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
+        velocity = input.normalized * move_speed*0.25f
+                    + new Vector2(0, verticalVelocity);
 
         if(verticalVelocity < maxVertVelocity) {
           verticalVelocity += velIncrement;
         }
+    }
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        float playerDisp = endPlanetY - transform.position.y;
+        float fullLength = fullBar.rect.width;
+        float frac = (fullDisplacement - playerDisp) / fullDisplacement;
+        Debug.Log(frac * fullLength);
+        progressBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, frac * fullLength);
+        // progressBar.rect.width = frac * fullLength;
     }
 
     public override void Take_Damage(int damage) {
@@ -48,6 +60,5 @@ public class Spaceship_Controller : Player_Controller
       anim.SetBool("Spinning_out", true);
       yield return new WaitForSeconds(0.5f);
       anim.SetBool("Spinning_out", false);
->>>>>>> parent of 4e0d591... Progress Bar Added to Space Cadet
     }
 }
