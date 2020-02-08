@@ -11,6 +11,7 @@ public class Confetti : MonoBehaviour
         if (other.tag == "Ball")
         {
             Instantiate(conf, transform.position, conf.transform.rotation);
+            other.GetComponent<Ball>().Death();
         }
     }
 }
