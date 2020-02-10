@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Ball
   - Block
-  - Ball Shadow
   layers:
   - Default
   - TransparentFX
