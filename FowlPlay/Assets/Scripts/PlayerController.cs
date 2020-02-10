@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PlayerController : MonoBehaviour
 {
@@ -43,6 +44,19 @@ public class PlayerController : MonoBehaviour
 
     public float gravity;
     public float jump_force;
+    
+    public bool can_move = true;
+
+    public Manager man;
+
+
+    public bool is_dashing = false;
+    public float dash_speed = 5;
+    public float dash_duration = 0.3f;
+    [HideInInspector]
+    public Vector3 dash_direction;
+
+    public GameObject ball_shadow;
 
     // Start is called before the first frame update
     void Start()
@@ -96,15 +110,22 @@ public class PlayerController : MonoBehaviour
 
         float dist = dist_v.magnitude;
 
+        float chance = (1-Mathf.Clamp(dist / max_dist2, 0, 1))*0.7f + 0.3f;
+        if(!is_defense && can_move) Debug.Log("Chance: " + chance);
+
         //Shoot the basketball
-        if (Input.GetButtonDown("Fire1") && dist< Mathf.Max(max_dist,max_dist2) && !is_defense)
+        if (!is_dashing && can_move && Input.GetButtonDown("Fire1") && dist< Mathf.Max(max_dist,max_dist2) && !is_defense)
         {
             GameObject ball_obj = Instantiate(ball_pref, ball_origin.position, ball_pref.transform.rotation);
             Rigidbody ball_rb = ball_obj.GetComponent<Rigidbody>();
 
+            GameObject ball_shadow_obj = Instantiate(ball_shadow, new Vector3(transform.position.x, 0, transform.position.z), ball_shadow.transform.rotation);
+            ball_shadow_obj.GetComponent<Shadow>().player = ball_obj.transform;
+
             ball_obj.GetComponent<Ball>().hoop = hoop_base;
             ball_obj.GetComponent<Ball>().player_off = transform;
             ball_obj.GetComponent<Ball>().player_def = other_player;
+            ball_obj.GetComponent<Ball>().shadow = ball_shadow_obj;
 
             Vector3 diff = (hoop_center.position - ball_origin.position);
 
@@ -125,33 +146,89 @@ public class PlayerController : MonoBehaviour
                 shoot_vel = shoot_vel1;
             }
 
-            float theta = Get_Ballistic(width, height, shoot_vel, Physics.gravity.y, true) * Mathf.Rad2Deg;
+            if (is_jumping) shoot_vel -= 1;
 
+            float theta = Get_Ballistic(width, height, shoot_vel, Physics.gravity.y, true) * Mathf.Rad2Deg;
+            
             Vector3 u = Vector3.Cross(diff_0y, Vector3.up);
 
             Vector3 ball_dir = (Quaternion.AngleAxis(theta, -u) * diff_0y).normalized;
 
+            if (Random.value > chance)
+            {
+                Debug.Log("FAILED SHOT");
+                ball_dir = (Quaternion.AngleAxis(Mathf.Sign(Random.value-0.5f)* 10, Vector3.up) * ball_dir).normalized;
+            }
+            else
+            {
+                man.GetComponent<PlayableDirector>().Play();
+            }
+
             ball_rb.velocity = ball_dir * shoot_vel;
 
             ball_rb.AddTorque(u * shoot_vel / 5);
+
+            can_move = false;
+            other_player.GetComponent<PlayerController>().can_move = false;
+
+            //man.GetComponent<PlayableDirector>().Play();
+            man.Reset();
+        }
+
+        //Dash
+        if(!is_dashing && can_move && Input.GetKeyDown(KeyCode.E) && !input_arrow)
+        {
+            if (!input_arrow)
+            {
+                dash_direction = new Vector3(Input.GetAxisRaw("Horizontal_key"),0, Input.GetAxisRaw("Vertical_key")).normalized;
+            }
+            else
+            {
+                dash_direction = new Vector3(Input.GetAxisRaw("Horizontal_arrow"),0, Input.GetAxisRaw("Vertical_arrow")).normalized;
+            }
+
+            StartCoroutine(Dash());
+        }
+        if (!is_dashing && can_move && Input.GetKeyDown(KeyCode.LeftControl) && input_arrow)
+        {
+            if (!input_arrow)
+            {
+                dash_direction = new Vector3(Input.GetAxisRaw("Horizontal_key"), 0, Input.GetAxisRaw("Vertical_key")).normalized;
+            }
+            else
+            {
+                dash_direction = new Vector3(Input.GetAxisRaw("Horizontal_arrow"), 0, Input.GetAxisRaw("Vertical_arrow")).normalized;
+            }
+
+            StartCoroutine(Dash());
         }
 
         //update block
         if (is_defense) Update_Block();
     }
 
+    public IEnumerator Dash()
+    {
+        is_dashing = true;
+        yield return new WaitForSeconds(dash_duration);
+        is_dashing = false;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         //Movement input
-        Vector2 input;
-        if (!input_arrow)
+        Vector2 input = Vector2.zero;
+        if (can_move)
         {
-            input = new Vector2(Input.GetAxisRaw("Horizontal_key"), Input.GetAxisRaw("Vertical_key"));
-        }
-        else
-        {
-            input = new Vector2(Input.GetAxisRaw("Horizontal_arrow"), Input.GetAxisRaw("Vertical_arrow"));
+            if (!input_arrow)
+            {
+                input = new Vector2(Input.GetAxisRaw("Horizontal_key"), Input.GetAxisRaw("Vertical_key"));
+            }
+            else
+            {
+                input = new Vector2(Input.GetAxisRaw("Horizontal_arrow"), Input.GetAxisRaw("Vertical_arrow"));
+            }
         }
 
         //make diagnols the same speed as forward
@@ -181,6 +258,8 @@ public class PlayerController : MonoBehaviour
         //Move
         Vector3 move = (transform.right * input.x + transform.forward * input.y)*move_speed;
 
+        if (is_dashing) move = dash_direction * dash_speed;
+
         if (is_defense)
         {
             //if on defense - cant go through player
@@ -199,7 +278,19 @@ public class PlayerController : MonoBehaviour
                 {
                     if (col.transform.root.gameObject != gameObject)
                     {
-                        move = Vector3.zero;
+                        Vector3 diff = other_player.position - transform.position;
+                        diff.y = 0;
+                        Vector3 norm = Vector3.Cross(diff, Vector3.up).normalized;
+                        //Debug.Log(Vector3.Dot(move, norm));
+                        if (is_dashing)
+                        {
+                            dash_direction = norm * Mathf.Sign(Vector3.Dot(dash_direction, norm));
+                            move = norm * dash_speed * Mathf.Sign(Vector3.Dot(dash_direction, norm));
+                        }
+                        else
+                        {
+                            move = Vector3.zero;
+                        }
                         //col.transform.root.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     }
                 }
@@ -222,7 +313,15 @@ public class PlayerController : MonoBehaviour
                     {
                         Vector3 norm = Vector3.Cross(col.transform.forward, Vector3.up).normalized;
                         //Debug.Log(Vector3.Dot(move, norm));
-                        move = norm * Vector3.Dot(move, norm);
+                        if (is_dashing)
+                        {
+                            dash_direction = norm * Mathf.Sign(Vector3.Dot(dash_direction, norm));
+                            move = norm * dash_speed * Mathf.Sign(Vector3.Dot(dash_direction, norm));
+                        }
+                        else
+                        {
+                            move = norm * Vector3.Dot(move, norm);
+                        }
                         //col.transform.root.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     }
                 }
@@ -234,7 +333,13 @@ public class PlayerController : MonoBehaviour
             is_jumping = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !is_jumping && !is_defense)
+        if (can_move && input_arrow && Input.GetKeyDown(KeyCode.Space) && !is_jumping && !is_dashing)
+        {
+            rb.velocity = Vector3.zero;
+            rb.AddForce(Vector3.up * jump_force);
+            is_jumping = true;
+        }
+        if (can_move && !input_arrow && Input.GetKeyDown(KeyCode.Q) && !is_jumping && !is_dashing)
         {
             rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.up * jump_force);

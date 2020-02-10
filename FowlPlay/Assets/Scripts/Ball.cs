@@ -16,6 +16,8 @@ public class Ball : MonoBehaviour
 
     public float reflect_dist;
 
+    public GameObject shadow;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -42,6 +44,7 @@ public class Ball : MonoBehaviour
 
     public void Death()
     {
+        Destroy(shadow, 5f);
         Destroy(gameObject, 5f);
     }
 

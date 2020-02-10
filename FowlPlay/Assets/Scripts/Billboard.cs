@@ -6,6 +6,6 @@ public class Billboard : MonoBehaviour
 {
     void LateUpdate()
     {
-        transform.LookAt(Camera.main.transform.position, Vector3.up);
+        if(Camera.current!=null) transform.rotation = Quaternion.LookRotation(Camera.current.transform.forward, Vector3.up);
     }
 }
