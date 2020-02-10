@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Shadow.cs" />
+    <Compile Include="Assets\Scripts\Up_n_down.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/FowlPlay/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

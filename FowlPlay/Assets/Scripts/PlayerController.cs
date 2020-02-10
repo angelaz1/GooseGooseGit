@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,8 +40,8 @@ public class PlayerController : MonoBehaviour
 
     public bool is_jumping;
 
-    //does char use arrows to move?
-    public bool input_arrow;
+    //does char use input1?
+    public bool input1;
 
     public float gravity;
     public float jump_force;
@@ -51,12 +52,21 @@ public class PlayerController : MonoBehaviour
 
 
     public bool is_dashing = false;
+    public bool can_dash = true;
     public float dash_speed = 5;
     public float dash_duration = 0.3f;
     [HideInInspector]
     public Vector3 dash_direction;
 
     public GameObject ball_shadow;
+
+    public Text chance_text;
+
+    public bool vulnerable = false;
+    public bool can_swipe = true;
+
+    private float jump_t = 0;
+    private float jump_grace=0.4f;
 
     // Start is called before the first frame update
     void Start()
@@ -111,10 +121,20 @@ public class PlayerController : MonoBehaviour
         float dist = dist_v.magnitude;
 
         float chance = (1-Mathf.Clamp(dist / max_dist2, 0, 1))*0.7f + 0.3f;
-        if(!is_defense && can_move) Debug.Log("Chance: " + chance);
+        if (!is_defense && can_move)
+        {
+            if (dist < max_dist2)
+            {
+                chance_text.text = ((int)(chance * 100)).ToString() + " %";
+            }
+            else
+            {
+                chance_text.text = "0 %";
+            }
+        }
 
         //Shoot the basketball
-        if (!is_dashing && can_move && Input.GetButtonDown("Fire1") && dist< Mathf.Max(max_dist,max_dist2) && !is_defense)
+        if (!is_dashing && can_move && (Input.GetButtonDown("Shoot2") && !input1) && dist< Mathf.Max(max_dist,max_dist2) && !is_defense)
         {
             GameObject ball_obj = Instantiate(ball_pref, ball_origin.position, ball_pref.transform.rotation);
             Rigidbody ball_rb = ball_obj.GetComponent<Rigidbody>();
@@ -159,9 +179,61 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("FAILED SHOT");
                 ball_dir = (Quaternion.AngleAxis(Mathf.Sign(Random.value-0.5f)* 10, Vector3.up) * ball_dir).normalized;
             }
+
+            ball_rb.velocity = ball_dir * shoot_vel;
+
+            ball_rb.AddTorque(u * shoot_vel / 5);
+
+            can_move = false;
+            other_player.GetComponent<PlayerController>().can_move = false;
+
+            //man.GetComponent<PlayableDirector>().Play();
+            man.Reset();
+        }
+        if (!is_dashing && can_move && (Input.GetButtonDown("Shoot1") && input1) && dist < Mathf.Max(max_dist, max_dist2) && !is_defense)
+        {
+            GameObject ball_obj = Instantiate(ball_pref, ball_origin.position, ball_pref.transform.rotation);
+            Rigidbody ball_rb = ball_obj.GetComponent<Rigidbody>();
+
+            GameObject ball_shadow_obj = Instantiate(ball_shadow, new Vector3(transform.position.x, 0, transform.position.z), ball_shadow.transform.rotation);
+            ball_shadow_obj.GetComponent<Shadow>().player = ball_obj.transform;
+
+            ball_obj.GetComponent<Ball>().hoop = hoop_base;
+            ball_obj.GetComponent<Ball>().player_off = transform;
+            ball_obj.GetComponent<Ball>().player_def = other_player;
+            ball_obj.GetComponent<Ball>().shadow = ball_shadow_obj;
+
+            Vector3 diff = (hoop_center.position - ball_origin.position);
+
+            Vector3 diff_0y = new Vector3(diff.x, 0, diff.z);
+
+            float height = -diff.y;
+            float width = diff_0y.magnitude;
+
+            //Debug.Log(height + " : " + width);
+
+            float shoot_vel;
+            if (dist > max_dist)
+            {
+                shoot_vel = (((dist - max_dist) / (max_dist2 - max_dist)) * (shoot_vel2 - shoot_vel1)) + shoot_vel1;
+            }
             else
             {
-                man.GetComponent<PlayableDirector>().Play();
+                shoot_vel = shoot_vel1;
+            }
+
+            if (is_jumping) shoot_vel -= 1;
+
+            float theta = Get_Ballistic(width, height, shoot_vel, Physics.gravity.y, true) * Mathf.Rad2Deg;
+
+            Vector3 u = Vector3.Cross(diff_0y, Vector3.up);
+
+            Vector3 ball_dir = (Quaternion.AngleAxis(theta, -u) * diff_0y).normalized;
+
+            if (Random.value > chance)
+            {
+                Debug.Log("FAILED SHOT");
+                ball_dir = (Quaternion.AngleAxis(Mathf.Sign(Random.value - 0.5f) * 10, Vector3.up) * ball_dir).normalized;
             }
 
             ball_rb.velocity = ball_dir * shoot_vel;
@@ -175,43 +247,86 @@ public class PlayerController : MonoBehaviour
             man.Reset();
         }
 
-        //Dash
-        if(!is_dashing && can_move && Input.GetKeyDown(KeyCode.E) && !input_arrow)
+        //swipe
+        if (!is_dashing && can_move && can_swipe && (Input.GetButtonDown("Shoot2") && !input1) && is_defense)
         {
-            if (!input_arrow)
+            float player_dist = Vector3.Distance(transform.position, other_player.position);
+            if (player_dist < 1.5f && other_player.GetComponent<PlayerController>().vulnerable)
             {
-                dash_direction = new Vector3(Input.GetAxisRaw("Horizontal_key"),0, Input.GetAxisRaw("Vertical_key")).normalized;
+                can_move = false;
+                other_player.GetComponent<PlayerController>().can_move = false;
+                man.Reset();
             }
-            else
+            StartCoroutine(Swipe());
+        }
+        if (!is_dashing && can_move && can_swipe && (Input.GetButtonDown("Shoot1") && input1) && is_defense)
+        {
+            float player_dist = Vector3.Distance(transform.position, other_player.position);
+            if (player_dist < 1.5f && other_player.GetComponent<PlayerController>().vulnerable)
             {
-                dash_direction = new Vector3(Input.GetAxisRaw("Horizontal_arrow"),0, Input.GetAxisRaw("Vertical_arrow")).normalized;
+                can_move = false;
+                other_player.GetComponent<PlayerController>().can_move = false;
+                man.Reset();
             }
+            StartCoroutine(Swipe());
+        }
 
+        //Dash
+        if (!is_dashing && can_move && Input.GetButtonDown("Dash2") && !input1 && can_dash)
+        {
+            dash_direction = new Vector3(Input.GetAxis("Horizontal2"), 0, Input.GetAxis("Vertical2"));
+            StartCoroutine(Flash_Vulnerability());
             StartCoroutine(Dash());
         }
-        if (!is_dashing && can_move && Input.GetKeyDown(KeyCode.LeftControl) && input_arrow)
+        if (!is_dashing && can_move && Input.GetButtonDown("Dash1") && input1 && can_dash)
         {
-            if (!input_arrow)
-            {
-                dash_direction = new Vector3(Input.GetAxisRaw("Horizontal_key"), 0, Input.GetAxisRaw("Vertical_key")).normalized;
-            }
-            else
-            {
-                dash_direction = new Vector3(Input.GetAxisRaw("Horizontal_arrow"), 0, Input.GetAxisRaw("Vertical_arrow")).normalized;
-            }
-
+            dash_direction = new Vector3(Input.GetAxis("Horizontal1"), 0, Input.GetAxis("Vertical1"));
+            StartCoroutine(Flash_Vulnerability());
             StartCoroutine(Dash());
         }
 
         //update block
         if (is_defense) Update_Block();
+
+        //Jumping
+
+        if (can_move && input1 && Input.GetButtonDown("Jump1") && !is_jumping && !is_dashing)
+        {
+            jump_t = jump_grace;
+        }
+        if (can_move && !input1 && Input.GetButtonDown("Jump2") && !is_jumping && !is_dashing)
+        {
+            jump_t = jump_grace;
+        }
+
+        if (jump_t > 0)
+        {
+            jump_t -= Time.deltaTime;
+        }
     }
 
     public IEnumerator Dash()
     {
         is_dashing = true;
+        can_dash = false;
         yield return new WaitForSeconds(dash_duration);
         is_dashing = false;
+        yield return new WaitForSeconds(1);
+        can_dash = true;
+    }
+
+    public IEnumerator Flash_Vulnerability()
+    {
+        vulnerable = true;
+        yield return new WaitForSeconds(0.4f);
+        vulnerable = false;
+    }
+
+    public IEnumerator Swipe()
+    {
+        can_swipe = false;
+        yield return new WaitForSeconds(1f);
+        can_swipe = true;
     }
 
     // Update is called once per frame
@@ -221,13 +336,13 @@ public class PlayerController : MonoBehaviour
         Vector2 input = Vector2.zero;
         if (can_move)
         {
-            if (!input_arrow)
+            if (input1)
             {
-                input = new Vector2(Input.GetAxisRaw("Horizontal_key"), Input.GetAxisRaw("Vertical_key"));
+                input = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
             }
             else
             {
-                input = new Vector2(Input.GetAxisRaw("Horizontal_arrow"), Input.GetAxisRaw("Vertical_arrow"));
+                input = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
             }
         }
 
@@ -271,7 +386,7 @@ public class PlayerController : MonoBehaviour
 
             BoxCollider bcol = block.GetComponentInChildren<BoxCollider>();
 
-            if (Vector3.Dot(move, towards_hoop) < 0)
+            if (Vector3.Dot(move, towards_hoop) < 0 && !is_dashing)
             {
                 Collider[] cols1 = Physics.OverlapSphere(transform.position + move * Time.fixedDeltaTime + move.normalized * 0.4f, 0.2f, player_mask);
                 foreach (Collider col in cols1)
@@ -282,15 +397,7 @@ public class PlayerController : MonoBehaviour
                         diff.y = 0;
                         Vector3 norm = Vector3.Cross(diff, Vector3.up).normalized;
                         //Debug.Log(Vector3.Dot(move, norm));
-                        if (is_dashing)
-                        {
-                            dash_direction = norm * Mathf.Sign(Vector3.Dot(dash_direction, norm));
-                            move = norm * dash_speed * Mathf.Sign(Vector3.Dot(dash_direction, norm));
-                        }
-                        else
-                        {
-                            move = Vector3.zero;
-                        }
+                        move = Vector3.zero;
                         //col.transform.root.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     }
                 }
@@ -333,14 +440,18 @@ public class PlayerController : MonoBehaviour
             is_jumping = false;
         }
 
-        if (can_move && input_arrow && Input.GetKeyDown(KeyCode.Space) && !is_jumping && !is_dashing)
+        if (can_move && jump_t>0 && !is_jumping && !is_dashing)
         {
+            jump_t = 0;
+            StartCoroutine(Flash_Vulnerability());
             rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.up * jump_force);
             is_jumping = true;
         }
-        if (can_move && !input_arrow && Input.GetKeyDown(KeyCode.Q) && !is_jumping && !is_dashing)
+        if (can_move && jump_t > 0 && !is_jumping && !is_dashing)
         {
+            jump_t = 0;
+            StartCoroutine(Flash_Vulnerability());
             rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.up * jump_force);
             is_jumping = true;

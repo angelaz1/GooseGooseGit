@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Ball : MonoBehaviour
 {
@@ -39,6 +40,11 @@ public class Ball : MonoBehaviour
         {
             Debug.Log("jumpshot");
             clean_shot = true;
+        }
+
+        if (clean_shot)
+        {
+            player_off.GetComponent<PlayerController>().man.GetComponent<PlayableDirector>().Play();
         }
     }
 
