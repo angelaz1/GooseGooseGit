@@ -29,16 +29,14 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
   sceneClasses:
-    Assets/Scenes/SampleScene.unity:
+    Assets/Scenes/Goose_Court.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -120,7 +118,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12964}
     - Class: 114
-      Script: {instanceID: 27684}
+      Script: {instanceID: 20900}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -370,7 +368,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 234d43b9542f0ee40820afbf1a0ee6e1
+      Hash: b382c1b79be54cab9b15888cc60db2b2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -640,5 +638,5 @@ ScriptsOnlyBuild:
     className: Confetti
   platform: 5
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/Goose_Court.unity
   playerPath: C:/Users/jdpar/OneDrive/Desktop/unity games/fowlplay/FowlPlay.exe

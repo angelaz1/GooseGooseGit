@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour
     public Sprite swipe_full;
     public Sprite swipe_faded;
 
+    public Transform arrow;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -336,7 +338,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //swipe
-        if (!is_dashing && can_move && can_swipe && (Input.GetButtonDown("Shoot2") && !input1) && is_defense)
+        if (!is_dashing && can_move && !is_jumping && can_swipe && (Input.GetButtonDown("Shoot2") && !input1) && is_defense)
         {
             float player_dist = Vector3.Distance(transform.position, other_player.position);
             if (player_dist < 2f && other_player.GetComponent<PlayerController>().vulnerable)
@@ -349,7 +351,7 @@ public class PlayerController : MonoBehaviour
             }
             StartCoroutine(Swipe());
         }
-        if (!is_dashing && can_move && can_swipe && (Input.GetButtonDown("Shoot1") && input1) && is_defense)
+        if (!is_dashing && can_move && !is_jumping && can_swipe && (Input.GetButtonDown("Shoot1") && input1) && is_defense)
         {
             float player_dist = Vector3.Distance(transform.position, other_player.position);
             if (player_dist < 2f && other_player.GetComponent<PlayerController>().vulnerable)
@@ -375,6 +377,30 @@ public class PlayerController : MonoBehaviour
             dash_direction = new Vector3(Input.GetAxis("Horizontal1"), 0, Input.GetAxis("Vertical1"));
             StartCoroutine(Flash_Vulnerability());
             StartCoroutine(Dash());
+        }
+
+        if (!is_jumping && can_move && can_dash)
+        {
+            arrow.gameObject.SetActive(true);
+        }
+        else
+        {
+            arrow.gameObject.SetActive(false);
+        }
+
+        if (input1)
+        {
+            Vector2 input_ = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
+            if(input_==Vector2.zero && arrow.gameObject.activeSelf) arrow.gameObject.SetActive(false);
+            arrow.transform.localScale = new Vector3(1.5f * Mathf.Clamp(input_.magnitude,0,1), 1.5f, 1f);
+            arrow.transform.rotation = Quaternion.Euler(new Vector3(90, 0, Mathf.Atan2(input_.y, input_.x) * Mathf.Rad2Deg));
+        }
+        else
+        {
+            Vector2 input_ = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
+            if (input_ == Vector2.zero && arrow.gameObject.activeSelf) arrow.gameObject.SetActive(false);
+            arrow.transform.localScale = new Vector3(1.5f * Mathf.Clamp(input_.magnitude, 0, 1), 1.5f, 1f);
+            arrow.transform.rotation = Quaternion.Euler(new Vector3(90, 0, Mathf.Atan2(input_.y, input_.x) * Mathf.Rad2Deg));
         }
 
         //update block
