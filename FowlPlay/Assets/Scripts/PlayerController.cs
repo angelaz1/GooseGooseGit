@@ -60,13 +60,28 @@ public class PlayerController : MonoBehaviour
 
     public GameObject ball_shadow;
 
-    public Text chance_text;
+    public Image chance_image;
+    public List<Sprite> chance_images;
 
     public bool vulnerable = false;
     public bool can_swipe = true;
+    public Image vulnerable_image;
 
     private float jump_t = 0;
     private float jump_grace=0.4f;
+
+    public int score = 0;
+    public Text score_text;
+
+    public Transform char_;
+
+    public Image can_shoot_image;
+    public Sprite can_shoot_full;
+    public Sprite can_shoot_faded;
+
+    public Image swipe_image;
+    public Sprite swipe_full;
+    public Sprite swipe_faded;
 
     // Start is called before the first frame update
     void Start()
@@ -80,12 +95,50 @@ public class PlayerController : MonoBehaviour
         float diff_y2 = ball_origin.position.y - backboard_center.position.y;
         max_dist2 = (shoot_vel2 / -Physics.gravity.y) * Mathf.Sqrt(Mathf.Pow(shoot_vel2, 2) + 2 * -Physics.gravity.y * diff_y2);
         Block_on_off();
+        Update_UI();
+        vulnerable_image.gameObject.SetActive(false);
+    }
+
+    public void Update_UI()
+    {
+        score_text.text = score.ToString();
+
+        if (can_swipe)
+        {
+            swipe_image.sprite = swipe_full;
+        }
+        else
+        {
+            swipe_image.sprite = swipe_faded;
+        }
     }
 
     //turn blocking on or off
     public void Block_on_off()
     {
+        if (is_defense)
+        {
+            char_.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            char_.localScale = new Vector3(1, 1, 1);
+        }
+
         block.gameObject.SetActive(is_defense);
+        chance_image.gameObject.SetActive(!is_defense);
+        can_shoot_image.gameObject.SetActive(!is_defense);
+        swipe_image.gameObject.SetActive(is_defense);
+    }
+
+    public void Block_Off_Move()
+    {
+        char_.localScale = new Vector3(-1, 1, 1);
+
+        block.gameObject.SetActive(false);
+        chance_image.gameObject.SetActive(false);
+        can_shoot_image.gameObject.SetActive(false);
+        swipe_image.gameObject.SetActive(false);
     }
 
     //rotate block
@@ -121,15 +174,44 @@ public class PlayerController : MonoBehaviour
         float dist = dist_v.magnitude;
 
         float chance = (1-Mathf.Clamp(dist / max_dist2, 0, 1))*0.7f + 0.3f;
+        if (dist < 1.5f) chance = 1f;
         if (!is_defense && can_move)
         {
-            if (dist < max_dist2)
+            Vector3 p_diff_ = transform.position - other_player.position;
+            p_diff_.y = 0;
+            float p_dist_ = p_diff_.magnitude;
+
+            float dot = Vector3.Dot(p_diff_, dist_v);
+
+            Debug.Log("player_dot: " + dot);
+
+            if ((p_dist_ > 2f || dot >= 1 || is_jumping)&& dist < max_dist2)
             {
-                chance_text.text = ((int)(chance * 100)).ToString() + " %";
+                can_shoot_image.sprite = can_shoot_full;
             }
             else
             {
-                chance_text.text = "0 %";
+                can_shoot_image.sprite = can_shoot_faded;
+            }
+
+            if (dist < max_dist2)
+            {
+                if (chance > 0.75f)
+                {
+                    chance_image.sprite = chance_images[3];
+                }
+                else if (chance > 0.5f)
+                {
+                    chance_image.sprite = chance_images[2];
+                }
+                else
+                {
+                    chance_image.sprite = chance_images[1];
+                }
+            }
+            else
+            {
+                chance_image.sprite = chance_images[0];
             }
         }
 
@@ -146,6 +228,7 @@ public class PlayerController : MonoBehaviour
             ball_obj.GetComponent<Ball>().player_off = transform;
             ball_obj.GetComponent<Ball>().player_def = other_player;
             ball_obj.GetComponent<Ball>().shadow = ball_shadow_obj;
+            ball_obj.GetComponent<Ball>().player1_ball = false;
 
             Vector3 diff = (hoop_center.position - ball_origin.position);
 
@@ -176,8 +259,9 @@ public class PlayerController : MonoBehaviour
 
             if (Random.value > chance)
             {
-                Debug.Log("FAILED SHOT");
-                ball_dir = (Quaternion.AngleAxis(Mathf.Sign(Random.value-0.5f)* 10, Vector3.up) * ball_dir).normalized;
+                float fuck_up = 5f+(1-Mathf.Clamp(((dist - max_dist) / (max_dist2 - max_dist)),0,1))*15f;
+                Debug.Log("FAILED SHOT: " + fuck_up);
+                ball_dir = (Quaternion.AngleAxis(Mathf.Sign(Random.value-0.5f)* fuck_up, Vector3.up) * ball_dir).normalized;
             }
 
             ball_rb.velocity = ball_dir * shoot_vel;
@@ -188,7 +272,8 @@ public class PlayerController : MonoBehaviour
             other_player.GetComponent<PlayerController>().can_move = false;
 
             //man.GetComponent<PlayableDirector>().Play();
-            man.Reset();
+            man.player1_off = true;
+            man.Reset(true);
         }
         if (!is_dashing && can_move && (Input.GetButtonDown("Shoot1") && input1) && dist < Mathf.Max(max_dist, max_dist2) && !is_defense)
         {
@@ -202,6 +287,7 @@ public class PlayerController : MonoBehaviour
             ball_obj.GetComponent<Ball>().player_off = transform;
             ball_obj.GetComponent<Ball>().player_def = other_player;
             ball_obj.GetComponent<Ball>().shadow = ball_shadow_obj;
+            ball_obj.GetComponent<Ball>().player1_ball = true;
 
             Vector3 diff = (hoop_center.position - ball_origin.position);
 
@@ -232,8 +318,9 @@ public class PlayerController : MonoBehaviour
 
             if (Random.value > chance)
             {
-                Debug.Log("FAILED SHOT");
-                ball_dir = (Quaternion.AngleAxis(Mathf.Sign(Random.value - 0.5f) * 10, Vector3.up) * ball_dir).normalized;
+                float fuck_up = 5f + (1 - Mathf.Clamp(((dist - max_dist) / (max_dist2 - max_dist)), 0, 1)) * 15f;
+                //Debug.Log("FAILED SHOT: " + fuck_up);
+                ball_dir = (Quaternion.AngleAxis(Mathf.Sign(Random.value - 0.5f) * fuck_up, Vector3.up) * ball_dir).normalized;
             }
 
             ball_rb.velocity = ball_dir * shoot_vel;
@@ -244,41 +331,46 @@ public class PlayerController : MonoBehaviour
             other_player.GetComponent<PlayerController>().can_move = false;
 
             //man.GetComponent<PlayableDirector>().Play();
-            man.Reset();
+            man.player1_off = false;
+            man.Reset(true);
         }
 
         //swipe
         if (!is_dashing && can_move && can_swipe && (Input.GetButtonDown("Shoot2") && !input1) && is_defense)
         {
             float player_dist = Vector3.Distance(transform.position, other_player.position);
-            if (player_dist < 1.5f && other_player.GetComponent<PlayerController>().vulnerable)
+            if (player_dist < 2f && other_player.GetComponent<PlayerController>().vulnerable)
             {
                 can_move = false;
                 other_player.GetComponent<PlayerController>().can_move = false;
-                man.Reset();
+                man.player1_off = false;
+                man.Green_Score();
+                man.Reset(false);
             }
             StartCoroutine(Swipe());
         }
         if (!is_dashing && can_move && can_swipe && (Input.GetButtonDown("Shoot1") && input1) && is_defense)
         {
             float player_dist = Vector3.Distance(transform.position, other_player.position);
-            if (player_dist < 1.5f && other_player.GetComponent<PlayerController>().vulnerable)
+            if (player_dist < 2f && other_player.GetComponent<PlayerController>().vulnerable)
             {
                 can_move = false;
                 other_player.GetComponent<PlayerController>().can_move = false;
-                man.Reset();
+                man.player1_off = true;
+                man.Green_Score();
+                man.Reset(false);
             }
             StartCoroutine(Swipe());
         }
 
         //Dash
-        if (!is_dashing && can_move && Input.GetButtonDown("Dash2") && !input1 && can_dash)
+        if (!is_jumping && !is_dashing && can_move && Input.GetButtonDown("Dash2") && !input1 && can_dash)
         {
             dash_direction = new Vector3(Input.GetAxis("Horizontal2"), 0, Input.GetAxis("Vertical2"));
             StartCoroutine(Flash_Vulnerability());
             StartCoroutine(Dash());
         }
-        if (!is_dashing && can_move && Input.GetButtonDown("Dash1") && input1 && can_dash)
+        if (!is_jumping && !is_dashing && can_move && Input.GetButtonDown("Dash1") && input1 && can_dash)
         {
             dash_direction = new Vector3(Input.GetAxis("Horizontal1"), 0, Input.GetAxis("Vertical1"));
             StartCoroutine(Flash_Vulnerability());
@@ -303,6 +395,8 @@ public class PlayerController : MonoBehaviour
         {
             jump_t -= Time.deltaTime;
         }
+
+        Update_UI();
     }
 
     public IEnumerator Dash()
@@ -318,8 +412,10 @@ public class PlayerController : MonoBehaviour
     public IEnumerator Flash_Vulnerability()
     {
         vulnerable = true;
+        vulnerable_image.gameObject.SetActive(!is_defense);
         yield return new WaitForSeconds(0.4f);
         vulnerable = false;
+        vulnerable_image.gameObject.SetActive(false);
     }
 
     public IEnumerator Swipe()
