@@ -23,6 +23,7 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.Image
     - UnityEngine.UI.Shadow
     - UnityEngine.UI.Text
     UnityEditor.Graphs.dll:
@@ -35,7 +36,7 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
   sceneClasses:
-    Assets/Scenes/SampleScene.unity:
+    Assets/Scenes/Goose_Court.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -60,9 +61,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 89
+      Script: {instanceID: 0}
+    - Class: 91
       Script: {instanceID: 0}
     - Class: 95
       Script: {instanceID: 0}
@@ -73,45 +78,47 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11054}
+      Script: {instanceID: 11056}
     - Class: 114
-      Script: {instanceID: 11058}
+      Script: {instanceID: 11060}
     - Class: 114
-      Script: {instanceID: 11180}
+      Script: {instanceID: 11190}
     - Class: 114
-      Script: {instanceID: 11196}
+      Script: {instanceID: 11206}
     - Class: 114
-      Script: {instanceID: 11214}
+      Script: {instanceID: 11224}
     - Class: 114
-      Script: {instanceID: 11566}
+      Script: {instanceID: 11264}
     - Class: 114
-      Script: {instanceID: 11646}
+      Script: {instanceID: 11484}
     - Class: 114
-      Script: {instanceID: 11770}
+      Script: {instanceID: 11586}
     - Class: 114
-      Script: {instanceID: 12168}
+      Script: {instanceID: 11670}
     - Class: 114
-      Script: {instanceID: 12192}
+      Script: {instanceID: 11800}
     - Class: 114
-      Script: {instanceID: 12228}
+      Script: {instanceID: 12060}
     - Class: 114
-      Script: {instanceID: 12296}
+      Script: {instanceID: 12210}
     - Class: 114
-      Script: {instanceID: 12322}
+      Script: {instanceID: 12234}
     - Class: 114
-      Script: {instanceID: 12472}
+      Script: {instanceID: 12272}
     - Class: 114
-      Script: {instanceID: 12606}
+      Script: {instanceID: 12344}
     - Class: 114
-      Script: {instanceID: 12830}
+      Script: {instanceID: 12372}
+    - Class: 114
+      Script: {instanceID: 12528}
+    - Class: 114
+      Script: {instanceID: 12670}
     - Class: 114
       Script: {instanceID: 12896}
     - Class: 114
-      Script: {instanceID: 20752}
+      Script: {instanceID: 12964}
     - Class: 114
-      Script: {instanceID: 49658}
-    - Class: 114
-      Script: {instanceID: 52526}
+      Script: {instanceID: 20900}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -145,7 +152,7 @@ ScriptsOnlyBuild:
   scriptHashData:
   - hash:
       serializedVersion: 2
-      Hash: 5c4ea0b0a71a158515a68df09f2baf61
+      Hash: 614498e33dcde1c71b43a7b10ad327e7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ball
@@ -181,7 +188,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 442cee8990f6d24be96950b0b19563dd
+      Hash: 5c877df0b3fd6fea6481191ff530bddb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Manager
@@ -295,6 +302,12 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
+      Hash: 1be8c57450f3a238640645059cff0800
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Up_n_down
+  - hash:
+      serializedVersion: 2
       Hash: 5ab533713adae59372fb3e10a585c186
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -355,7 +368,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 5615188eafb2f546aad5bbe135475c96
+      Hash: b382c1b79be54cab9b15888cc60db2b2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -413,6 +426,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.ugui.dll
     namespaceName: UnityEngine.UI
     className: RawImage
+  - hash:
+      serializedVersion: 2
+      Hash: e926ce3e0532096c87c18649220306dd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Shadow
   - hash:
       serializedVersion: 2
       Hash: 5ad4aa237d47ac2bab17bacb672edf7a
@@ -613,23 +632,11 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 56bd807de7adf89175cd5078b7e530d9
+      Hash: 555e8a224fbc2dd121be14b88ca3f88d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Confetti
-  - hash:
-      serializedVersion: 2
-      Hash: e926ce3e0532096c87c18649220306dd
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Shadow
-  - hash:
-      serializedVersion: 2
-      Hash: 1be8c57450f3a238640645059cff0800
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Up_n_down
   platform: 5
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/Goose_Court.unity
   playerPath: C:/Users/jdpar/OneDrive/Desktop/unity games/fowlplay/FowlPlay.exe

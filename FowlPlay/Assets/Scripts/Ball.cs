@@ -19,20 +19,22 @@ public class Ball : MonoBehaviour
 
     public GameObject shadow;
 
+    public bool player1_ball = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
         float dist = (new Vector3(player_off.position.x, 0, player_off.position.z) - new Vector3(player_def.position.x, 0, player_def.position.z)).magnitude;
 
-        Debug.Log("Player dist: " + dist);
+        //Debug.Log("Player dist: " + dist);
 
         Vector3 player_diff = player_def.position - player_off.position;
         Vector3 hoop_vector = hoop.position - player_off.position;
 
         float dot = Vector3.Dot(player_diff, hoop_vector);
 
-        Debug.Log("dot: " + dot);
+        //Debug.Log("dot: " + dot);
 
         if (dist > reflect_dist || dot <=-1) clean_shot = true;
         
@@ -52,6 +54,11 @@ public class Ball : MonoBehaviour
     {
         Destroy(shadow, 5f);
         Destroy(gameObject, 5f);
+    }
+
+    public void Score()
+    {
+        player_off.GetComponent<PlayerController>().score++;
     }
 
     public void Update()
