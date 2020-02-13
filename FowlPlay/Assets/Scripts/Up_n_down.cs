@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Up_n_down : MonoBehaviour
 {
-    public float amplitude;
-    public float period;
+    private float amplitude;
+    private float period;
 
     private Vector3 init_pos;
     private float offset;
@@ -15,6 +15,8 @@ public class Up_n_down : MonoBehaviour
     {
         init_pos = transform.position;
         offset = Random.value * 2*period;
+        amplitude = Random.value * 0.25f + 0.15f;
+        period = Random.value * 2f + 2f;
     }
 
     // Update is called once per frame
