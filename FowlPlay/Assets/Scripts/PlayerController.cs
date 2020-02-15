@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform arrow;
 
+    public Animator char_anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -118,6 +120,8 @@ public class PlayerController : MonoBehaviour
     //turn blocking on or off
     public void Block_on_off()
     {
+        char_anim.SetBool("has_ball", !is_defense);
+        char_anim.SetTrigger("switch");
         if (is_defense)
         {
             char_.localScale = new Vector3(-1, 1, 1);
@@ -141,6 +145,8 @@ public class PlayerController : MonoBehaviour
         chance_image.gameObject.SetActive(false);
         can_shoot_image.gameObject.SetActive(false);
         swipe_image.gameObject.SetActive(false);
+        char_anim.SetBool("has_ball", false);
+        char_anim.SetTrigger("walk");
     }
 
     //rotate block
@@ -276,6 +282,8 @@ public class PlayerController : MonoBehaviour
             //man.GetComponent<PlayableDirector>().Play();
             man.player1_off = true;
             man.Reset(true);
+            char_anim.SetBool("has_ball", false);
+            char_anim.SetTrigger("switch");
         }
         if (!is_dashing && can_move && (Input.GetButtonDown("Shoot1") && input1) && dist < Mathf.Max(max_dist, max_dist2) && !is_defense)
         {
@@ -335,6 +343,8 @@ public class PlayerController : MonoBehaviour
             //man.GetComponent<PlayableDirector>().Play();
             man.player1_off = false;
             man.Reset(true);
+            char_anim.SetBool("has_ball", false);
+            char_anim.SetTrigger("switch");
         }
 
         //swipe
@@ -345,11 +355,16 @@ public class PlayerController : MonoBehaviour
             {
                 can_move = false;
                 other_player.GetComponent<PlayerController>().can_move = false;
-                man.player1_off = false;
-                man.Green_Score();
-                man.Reset(false);
+                other_player.GetComponent<PlayerController>().char_anim.SetBool("has_ball", false);
+                other_player.GetComponent<PlayerController>().char_anim.SetTrigger("walk");
+
+                StartCoroutine(Swipe(true, false));
             }
-            StartCoroutine(Swipe());
+            else
+            {
+                StartCoroutine(Swipe(false, false));
+            }
+            char_anim.SetTrigger("swipe");
         }
         if (!is_dashing && can_move && !is_jumping && can_swipe && (Input.GetButtonDown("Shoot1") && input1) && is_defense)
         {
@@ -358,25 +373,55 @@ public class PlayerController : MonoBehaviour
             {
                 can_move = false;
                 other_player.GetComponent<PlayerController>().can_move = false;
-                man.player1_off = true;
-                man.Green_Score();
-                man.Reset(false);
+                other_player.GetComponent<PlayerController>().char_anim.SetBool("has_ball", false);
+                other_player.GetComponent<PlayerController>().char_anim.SetTrigger("walk");
+
+                StartCoroutine(Swipe(true, true));
             }
-            StartCoroutine(Swipe());
+            else
+            {
+                StartCoroutine(Swipe(false,true));
+            }
+            char_anim.SetTrigger("swipe");
+            
         }
 
         //Dash
         if (!is_jumping && !is_dashing && can_move && Input.GetButtonDown("Dash2") && !input1 && can_dash)
         {
             dash_direction = new Vector3(Input.GetAxis("Horizontal2"), 0, Input.GetAxis("Vertical2"));
-            StartCoroutine(Flash_Vulnerability());
-            StartCoroutine(Dash());
+            if (dash_direction != Vector3.zero)
+            {
+                StartCoroutine(Flash_Vulnerability());
+                StartCoroutine(Dash());
+                char_anim.SetTrigger("dash");
+            }
         }
         if (!is_jumping && !is_dashing && can_move && Input.GetButtonDown("Dash1") && input1 && can_dash)
         {
             dash_direction = new Vector3(Input.GetAxis("Horizontal1"), 0, Input.GetAxis("Vertical1"));
+            if (dash_direction != Vector3.zero)
+            {
+                StartCoroutine(Flash_Vulnerability());
+                StartCoroutine(Dash());
+                char_anim.SetTrigger("dash");
+            }
+        }
+
+        //fakeout
+        if (!is_jumping && !is_dashing && can_move && Input.GetButtonDown("Fake2") && !input1 && can_dash)
+        {
+            dash_direction = Vector3.zero;
             StartCoroutine(Flash_Vulnerability());
-            StartCoroutine(Dash());
+            StartCoroutine(FakeDash());
+            char_anim.SetTrigger("fakeout");
+        }
+        if (!is_jumping && !is_dashing && can_move && Input.GetButtonDown("Fake1") && input1 && can_dash)
+        {
+            dash_direction = Vector3.zero;
+            StartCoroutine(Flash_Vulnerability());
+            StartCoroutine(FakeDash());
+            char_anim.SetTrigger("fakeout");
         }
 
         if (!is_jumping && can_move && can_dash)
@@ -422,6 +467,8 @@ public class PlayerController : MonoBehaviour
             jump_t -= Time.deltaTime;
         }
 
+        char_anim.SetBool("jumping", is_jumping);
+
         Update_UI();
     }
 
@@ -435,6 +482,18 @@ public class PlayerController : MonoBehaviour
         can_dash = true;
     }
 
+    public IEnumerator FakeDash()
+    {
+        is_dashing = true;
+        can_dash = false;
+        can_move = false;
+        yield return new WaitForSeconds(dash_duration);
+        is_dashing = false;
+        yield return new WaitForSeconds(0.2f);
+        can_move = true;
+        can_dash = true;
+    }
+
     public IEnumerator Flash_Vulnerability()
     {
         vulnerable = true;
@@ -444,11 +503,18 @@ public class PlayerController : MonoBehaviour
         vulnerable_image.gameObject.SetActive(false);
     }
 
-    public IEnumerator Swipe()
+    public IEnumerator Swipe(bool success, bool def)
     {
         can_swipe = false;
         yield return new WaitForSeconds(1f);
         can_swipe = true;
+
+        if (success)
+        {
+            man.player1_off = def;
+            man.Green_Score();
+            man.Reset(false);
+        }
     }
 
     // Update is called once per frame

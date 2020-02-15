@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Confetti.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Referee.cs" />
     <Compile Include="Assets\Scripts\Shadow.cs" />
     <Compile Include="Assets\Scripts\Up_n_down.cs" />
     <Reference Include="Unity.Timeline.Editor">
@@ -86,6 +87,9 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>D:/FowlPlay/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>D:/FowlPlay/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>D:/FowlPlay/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
@@ -100,9 +104,6 @@
     </Reference>
     <Reference Include="Unity.ugui.Editor">
       <HintPath>D:/FowlPlay/Library/ScriptAssemblies/Unity.ugui.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/FowlPlay/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/2019.3.0a3/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

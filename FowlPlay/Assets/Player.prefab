@@ -849,6 +849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3459009389606590204}
+  - component: {fileID: 1292699106}
   m_Layer: 9
   m_Name: character
   m_TagString: Untagged
@@ -872,6 +873,25 @@ Transform:
   m_Father: {fileID: 3459009390377316415}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1292699106
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459009389606590203}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ecda212e6fd20a54d8f47fcf49622a7c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3459009390258108255
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1088,7 @@ MonoBehaviour:
   swipe_full: {fileID: 21300000, guid: 98c16007209b4774fa522dc3e3dc9323, type: 3}
   swipe_faded: {fileID: 21300000, guid: 713c23bbc90f3664db633627d12747c7, type: 3}
   arrow: {fileID: 1860572432}
+  char_anim: {fileID: 1292699106}
 --- !u!136 &3459009390377316412
 CapsuleCollider:
   m_ObjectHideFlags: 0
