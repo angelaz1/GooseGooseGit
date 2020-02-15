@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TitleScreen.unity
     guid: 0cc454f9dafe74a9287dc3bdcfb7eb50
-  - enabled: 1
-    path: Assets/Scenes/CharacterSelect.unity
-    guid: 4f0995b26495c415fbbd4f320849f687
   m_configObjects: {}

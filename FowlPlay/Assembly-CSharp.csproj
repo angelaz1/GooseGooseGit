@@ -59,9 +59,9 @@
      <Compile Include="Assets\Scripts\Confetti.cs" />
      <Compile Include="Assets\Scripts\LoadScene.cs" />
      <Compile Include="Assets\Scripts\Manager.cs" />
-     <Compile Include="Assets\Scripts\Play_Button_Hover.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Shadow.cs" />
+     <Compile Include="Assets\Scripts\TitleScreenManager.cs" />
      <Compile Include="Assets\Scripts\Up_n_down.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/AngelaZ/Documents/GDPP/GooseGooseGit/FowlPlay/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
