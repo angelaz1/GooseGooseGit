@@ -8,9 +8,11 @@ public class Confetti : MonoBehaviour
 
     public Manager man;
 
+    bool can_score = true;
+
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Ball")
+        if (other.tag == "Ball" && can_score)
         {
             Instantiate(conf, transform.position, conf.transform.rotation);
             other.GetComponent<Ball>().Score();
@@ -24,7 +26,18 @@ public class Confetti : MonoBehaviour
             {
                 man.Red_Score();
             }
+            man.whomp.Play();
+
             man.player1_off = other.GetComponent<Ball>().player1_ball;
+
+            StartCoroutine(Score());
         }
+    }
+
+    public IEnumerator Score()
+    {
+        can_score = false;
+        yield return new WaitForSeconds(1);
+        can_score = true;
     }
 }

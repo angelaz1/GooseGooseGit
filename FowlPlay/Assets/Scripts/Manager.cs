@@ -38,6 +38,8 @@ public class Manager : MonoBehaviour
     public Text timer;
     public bool can_timer = true;
 
+    public AudioSource whomp;
+
     // Start is called before the first frame update
     void Start()
     {

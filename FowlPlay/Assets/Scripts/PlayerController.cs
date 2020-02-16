@@ -91,6 +91,9 @@ public class PlayerController : MonoBehaviour
     public GameObject dash_particle;
     public GameObject jump_particle;
 
+    public AudioSource honk_inator;
+    public AudioSource jump_sfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -288,6 +291,8 @@ public class PlayerController : MonoBehaviour
             man.Reset(true);
             char_anim.SetBool("has_ball", false);
             char_anim.SetTrigger("switch");
+            honk_inator.pitch = Random.Range(0.9f, 1.1f);
+            honk_inator.Play();
         }
         if (!is_dashing && can_move && (Input.GetButtonDown("Shoot1") && input1) && dist < Mathf.Max(max_dist, max_dist2) && !is_defense)
         {
@@ -349,6 +354,8 @@ public class PlayerController : MonoBehaviour
             man.Reset(true);
             char_anim.SetBool("has_ball", false);
             char_anim.SetTrigger("switch");
+            honk_inator.pitch = Random.Range(0.9f, 1.1f);
+            honk_inator.Play();
         }
 
         //swipe
@@ -478,6 +485,8 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator Dash()
     {
+        honk_inator.pitch = Random.Range(0.9f, 1.1f);
+        honk_inator.Play();
         GameObject dash1 = Instantiate(dash_particle, transform.position - new Vector3(0.5f, 0, 0), Quaternion.Euler(new Vector3(-90, 0, Mathf.Atan2(rb.velocity.z, rb.velocity.x) * -Mathf.Rad2Deg -90)));
         dash1.transform.SetParent(transform);
         Debug.Log(arrow.transform.eulerAngles.z);
@@ -491,6 +500,8 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator FakeDash()
     {
+        honk_inator.pitch = Random.Range(0.9f, 1.1f);
+        honk_inator.Play();
         GameObject dash1 = Instantiate(dash_particle, transform.position - new Vector3(0.5f, 0, 0), Quaternion.Euler(new Vector3(-90, 0, Mathf.Atan2(rb.velocity.z, rb.velocity.x) * -Mathf.Rad2Deg-90)));
         dash1.transform.SetParent(transform);
         Debug.Log(Mathf.Atan2(rb.velocity.z,rb.velocity.x)*Mathf.Rad2Deg);
@@ -515,6 +526,8 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator Swipe(bool success, bool def)
     {
+        honk_inator.pitch = Random.Range(0.9f, 1.1f);
+        honk_inator.Play();
         can_swipe = false;
         yield return new WaitForSeconds(1f);
         can_swipe = true;
@@ -640,8 +653,11 @@ public class PlayerController : MonoBehaviour
 
         if (can_move && jump_t>0 && !is_jumping && !is_dashing)
         {
+            jump_sfx.Play();
+            honk_inator.pitch = Random.Range(0.9f, 1.1f);
+            honk_inator.Play();
             jump_t = 0;
-            StartCoroutine(Flash_Vulnerability());
+            //StartCoroutine(Flash_Vulnerability());
             rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.up * jump_force);
             is_jumping = true;
@@ -649,8 +665,11 @@ public class PlayerController : MonoBehaviour
         }
         if (can_move && jump_t > 0 && !is_jumping && !is_dashing)
         {
+            honk_inator.pitch = Random.Range(0.9f, 1.1f);
+            honk_inator.Play();
+            jump_sfx.Play();
             jump_t = 0;
-            StartCoroutine(Flash_Vulnerability());
+            //StartCoroutine(Flash_Vulnerability());
             rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.up * jump_force);
             is_jumping = true;
