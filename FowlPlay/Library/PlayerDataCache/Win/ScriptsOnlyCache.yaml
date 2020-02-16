@@ -11,6 +11,7 @@ ScriptsOnlyBuild:
     - Up_n_down
     Unity.Timeline.Editor.dll:
     - UnityEditor.Timeline.SequenceHierarchy
+    - UnityEditor.Timeline.TimelineAssetViewModel
     - UnityEditor.Timeline.TimelineWindow
     Unity.Timeline.dll:
     - UnityEngine.Timeline.ActivationPlayableAsset
@@ -32,7 +33,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateMachineNode
     - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
@@ -125,7 +125,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12966}
     - Class: 114
-      Script: {instanceID: 19750}
+      Script: {instanceID: 33950}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -195,7 +195,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: e70cd4451bc2990d1d110cb1b4c9c0be
+      Hash: c3757a4f248b53b17a91392338695ace
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Manager

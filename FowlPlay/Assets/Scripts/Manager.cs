@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -39,6 +40,10 @@ public class Manager : MonoBehaviour
     public bool can_timer = true;
 
     public AudioSource whomp;
+
+    bool can_end = true;
+
+    public Animator icons;
 
     // Start is called before the first frame update
     void Start()
@@ -90,13 +95,26 @@ public class Manager : MonoBehaviour
     {
         if (t > 0 && can_timer) t -= Time.deltaTime;
 
-        if(Mathf.FloorToInt(t % 60) > 9)
+        if(t<=0 && can_end)
         {
-            timer.text = Mathf.FloorToInt(t / 60).ToString() + " : " + Mathf.FloorToInt(t % 60).ToString();
+            can_end = false;
+            StartCoroutine(End());
+        }
+
+        if (t > 0)
+        {
+            if (Mathf.FloorToInt(t % 60) > 9)
+            {
+                timer.text = Mathf.FloorToInt(t / 60).ToString() + " : " + Mathf.FloorToInt(t % 60).ToString();
+            }
+            else
+            {
+                timer.text = Mathf.FloorToInt(t / 60).ToString() + " : 0" + Mathf.FloorToInt(t % 60).ToString();
+            }
         }
         else
         {
-            timer.text = Mathf.FloorToInt(t / 60).ToString() + " : 0" + Mathf.FloorToInt(t % 60).ToString();
+            timer.text ="0 : 00";
         }
 
         float p_z = ((player1.transform.position.z + player2.transform.position.z) / 2)-1;
@@ -123,6 +141,23 @@ public class Manager : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator End()
+    {
+        player1.can_move = false;
+        player2.can_move = false;
+        if (player1.score >= player2.score)
+        {
+            icons.SetTrigger("blue");
+        }
+        else
+        {
+            icons.SetTrigger("red");
+        }
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(0);
+    }
+
 
     public void Reset(bool is_shot)
     {
