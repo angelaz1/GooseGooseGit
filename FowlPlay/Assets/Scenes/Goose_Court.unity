@@ -704,6 +704,10 @@ MonoBehaviour:
   swipe_faded: {fileID: 21300000, guid: 713c23bbc90f3664db633627d12747c7, type: 3}
   arrow: {fileID: 1342078258}
   char_anim: {fileID: 468556012}
+  dash_particle: {fileID: 7294339832449325538, guid: 40f517fc72f6a6942822408c1343ff68,
+    type: 3}
+  jump_particle: {fileID: 3184239559957633616, guid: ae67bd0fa10c4dd4b8c2acc9ab4e4c3f,
+    type: 3}
 --- !u!1 &245258389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3872,7 +3876,7 @@ Transform:
   m_GameObject: {fileID: 1481110524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.848, z: 0}
-  m_LocalScale: {x: 0.3, y: 2, z: 0.3}
+  m_LocalScale: {x: 0.2, y: 2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 293788193}
   m_RootOrder: 0
@@ -5229,6 +5233,18 @@ PrefabInstance:
       propertyPath: score_text
       value: 
       objectReference: {fileID: 953769442}
+    - target: {fileID: 3459009390377316401, guid: 1efb5f0120e293641a65027e39436964,
+        type: 3}
+      propertyPath: dash_particle
+      value: 
+      objectReference: {fileID: 7294339832449325538, guid: 40f517fc72f6a6942822408c1343ff68,
+        type: 3}
+    - target: {fileID: 3459009390377316401, guid: 1efb5f0120e293641a65027e39436964,
+        type: 3}
+      propertyPath: jump_particle
+      value: 
+      objectReference: {fileID: 3184239559957633616, guid: ae67bd0fa10c4dd4b8c2acc9ab4e4c3f,
+        type: 3}
     - target: {fileID: 3459009390377316411, guid: 1efb5f0120e293641a65027e39436964,
         type: 3}
       propertyPath: m_Name

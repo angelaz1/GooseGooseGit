@@ -87,6 +87,10 @@ public class PlayerController : MonoBehaviour
 
     public Animator char_anim;
 
+    //particles
+    public GameObject dash_particle;
+    public GameObject jump_particle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -191,7 +195,7 @@ public class PlayerController : MonoBehaviour
 
             float dot = Vector3.Dot(p_diff_, dist_v);
 
-            Debug.Log("player_dot: " + dot);
+            //Debug.Log("player_dot: " + dot);
 
             if ((p_dist_ > 2f || dot >= 1 || is_jumping)&& dist < max_dist2)
             {
@@ -474,6 +478,9 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator Dash()
     {
+        GameObject dash1 = Instantiate(dash_particle, transform.position - new Vector3(0.5f, 0, 0), Quaternion.Euler(new Vector3(-90, 0, Mathf.Atan2(rb.velocity.z, rb.velocity.x) * -Mathf.Rad2Deg -90)));
+        dash1.transform.SetParent(transform);
+        Debug.Log(arrow.transform.eulerAngles.z);
         is_dashing = true;
         can_dash = false;
         yield return new WaitForSeconds(dash_duration);
@@ -484,6 +491,9 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator FakeDash()
     {
+        GameObject dash1 = Instantiate(dash_particle, transform.position - new Vector3(0.5f, 0, 0), Quaternion.Euler(new Vector3(-90, 0, Mathf.Atan2(rb.velocity.z, rb.velocity.x) * -Mathf.Rad2Deg-90)));
+        dash1.transform.SetParent(transform);
+        Debug.Log(Mathf.Atan2(rb.velocity.z,rb.velocity.x)*Mathf.Rad2Deg);
         is_dashing = true;
         can_dash = false;
         can_move = false;
@@ -635,6 +645,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.up * jump_force);
             is_jumping = true;
+            Instantiate(jump_particle, transform.position - new Vector3(0,1,0), jump_particle.transform.rotation);
         }
         if (can_move && jump_t > 0 && !is_jumping && !is_dashing)
         {
@@ -643,6 +654,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.up * jump_force);
             is_jumping = true;
+            Instantiate(jump_particle, transform.position - new Vector3(0, 1, 0), jump_particle.transform.rotation);
         }
 
         move.y = rb.velocity.y - gravity * Time.fixedDeltaTime;

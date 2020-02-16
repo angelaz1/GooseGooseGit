@@ -29,11 +29,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateMachineNode
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -103,25 +100,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12060}
     - Class: 114
-      Script: {instanceID: 12210}
+      Script: {instanceID: 12212}
     - Class: 114
-      Script: {instanceID: 12234}
+      Script: {instanceID: 12236}
     - Class: 114
-      Script: {instanceID: 12272}
+      Script: {instanceID: 12274}
     - Class: 114
-      Script: {instanceID: 12344}
+      Script: {instanceID: 12346}
     - Class: 114
-      Script: {instanceID: 12372}
+      Script: {instanceID: 12374}
     - Class: 114
-      Script: {instanceID: 12528}
+      Script: {instanceID: 12530}
     - Class: 114
-      Script: {instanceID: 12670}
+      Script: {instanceID: 12672}
     - Class: 114
-      Script: {instanceID: 12896}
+      Script: {instanceID: 12898}
     - Class: 114
-      Script: {instanceID: 12964}
+      Script: {instanceID: 12966}
     - Class: 114
-      Script: {instanceID: 41912}
+      Script: {instanceID: 19750}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -371,7 +368,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 33f191e8da51dd479ecd358bede3f49c
+      Hash: edb8c7787326cdffcd0eb2e58cd74f28
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -441,6 +438,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.ugui.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: c9356ca3a142c9bc9032725b30121e20
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Referee
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
